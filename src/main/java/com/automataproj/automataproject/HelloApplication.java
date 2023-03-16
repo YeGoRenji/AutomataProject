@@ -1,13 +1,18 @@
 package com.automataproj.automataproject;
 
+import com.automataproj.automataproject.Metier.AFD;
+import com.automataproj.automataproject.Metier.AutomateFini;
 import com.automataproj.automataproject.Metier.Etat;
 import com.automataproj.automataproject.Metier.TypeEtat;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelloApplication extends Application {
     @Override
@@ -20,14 +25,19 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        Etat s1 = new Etat("s1", TypeEtat.INIT);
-        Etat s2 = new Etat("s2", TypeEtat.FINAL);
 
-        s1.addTransition("0", s2);
-        s1.addTransition("0", s2);
-        s1.addTransition("1", s1);
+//        AFD af = new AFD();
+//
+//        af.ajouterEtat("s1", TypeEtat.INIT_FINAL);
+//        af.ajouterEtat("s2", TypeEtat.MID);
+//        af.setAlphabet(List.of('0', '1'));
+//        af.ajouterTransition("s1", '0', "s2");
+//        af.ajouterTransition("s2", '0', "s1");
+//        af.ajouterTransition("s1", '1', "s1");
+//        af.ajouterTransition("s2", '1', "s2");
+//
+//        System.out.println(af.reconnaissanceMot("00001"));
 
-        System.out.println(s1);
-//        launch(args);
+        launch(args);
     }
 }

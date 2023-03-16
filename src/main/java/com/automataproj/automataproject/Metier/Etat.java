@@ -7,18 +7,24 @@ public class Etat {
 
     private TypeEtat type;
 
-    private HashMap<String, List<Etat>> transitionSortants;
+    private HashMap<Character, List<Etat>> transitionSortants;
 
+//    private HashMap<>
     public Etat(String idEtat, TypeEtat type) {
         this.idEtat = idEtat;
         this.type = type;
         transitionSortants = new HashMap<>();
     }
 
-    public void addTransition(String symbol, Etat etatSuivante)
+    public void addTransition(Character symbol, Etat etatSuivante)
     {
         List<Etat> etats;
         if (transitionSortants.containsKey(symbol)) {
+            if (transitionSortants.get(symbol).contains(etatSuivante))
+            {
+                System.err.println("Même transition déja Existe !");
+                return;
+            }
             transitionSortants.get(symbol).add(etatSuivante);
             return;
         }
@@ -27,9 +33,9 @@ public class Etat {
         transitionSortants.put(symbol, etats);
     }
 
-    public List<Etat> getNextState(String symbol)
+    public List<Etat> getNextState(Character symbol)
     {
-        if (symbol.isEmpty())
+        if (symbol == '\0')
             return null;
         return transitionSortants.get(symbol);
     }
@@ -56,10 +62,10 @@ public class Etat {
                 "   idEtat= '" + idEtat + '\'' + ",\n" +
                 "   type= " + type + ",\n" +
                 "   transitionSortants= { ";
-        for (String s: transitionSortants.keySet()) {
+        for (Character c: transitionSortants.keySet()) {
             str += '\n';
-            List<Etat> states = transitionSortants.get(s);
-            str +=  "      " + '\"' + s + '\"' + ": ";
+            List<Etat> states = transitionSortants.get(c);
+            str +=  "      " + '\'' + c + '\'' + ": ";
             for (Etat state: states) {
                 str += state.getIdEtat() + ", ";
             }
@@ -74,5 +80,9 @@ public class Etat {
     public boolean isFinal()
     {
         return (type == TypeEtat.FINAL || type == TypeEtat.INIT_FINAL);
+    }
+
+    public boolean isInital() {
+        return  (type == TypeEtat.INIT || type == TypeEtat.INIT_FINAL);
     }
 }
