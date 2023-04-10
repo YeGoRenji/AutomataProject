@@ -51,14 +51,6 @@ public class AFD extends AutomateFini {
             etatsFinal.add(etat);
     }
 
-    private Etat findEtat(String idEtat)
-    {
-        for (Etat e: etats) {
-            if (e.getIdEtat().equals(idEtat))
-                return e;
-        }
-        return null;
-    }
     @Override
     public void ajouterTransition(String idEtatDepart, Character c, String idEtatArrive)
     {
@@ -73,6 +65,11 @@ public class AFD extends AutomateFini {
         if (!alphabet.contains(c))
         {
             System.err.println("Character n'appartient pas au alphabet d'AFD");
+            return;
+        }
+        if (etatDep.getNextState(c) != null)
+        {
+            System.err.println("AFD : Transition deja exist avec le symbole (" + c + ")  !");
             return;
         }
         etatDep.addTransition(c, etatArr);

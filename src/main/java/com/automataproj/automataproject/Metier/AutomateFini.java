@@ -26,6 +26,15 @@ public abstract class AutomateFini {
         this.alphabet = alphabet;
     }
 
+    protected Etat findEtat(String idEtat)
+    {
+        for (Etat e: etats) {
+            if (e.getIdEtat().equals(idEtat))
+                return e;
+        }
+        return null;
+    }
+
     public abstract void ajouterEtat(String idEtat, TypeEtat type);
     public abstract void ajouterTransition(String idEtatDepart, Character c, String idEtatArrive);
 }
