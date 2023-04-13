@@ -77,6 +77,10 @@ public class Etat {
         return str;
     }
 
+    public HashMap<Character, List<Etat>> getTransitionSortants() {
+        return transitionSortants;
+    }
+
     public boolean isFinal()
     {
         return (type == TypeEtat.FINAL || type == TypeEtat.INIT_FINAL);

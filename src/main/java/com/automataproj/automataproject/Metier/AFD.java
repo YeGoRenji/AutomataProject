@@ -39,6 +39,11 @@ public class AFD extends AutomateFini {
     public void ajouterEtat(String idEtat, TypeEtat type) {
         Etat etat = new Etat(idEtat, type);
 
+        if (findEtat(idEtat) != null)
+        {
+            System.err.println("Etat deja existe !");
+            return;
+        }
         if (etat.isInital() && etatsInit.size() > 0)
         {
             System.err.println("Impossible d'avoir plus qu'une etat initiale pour AFD");
