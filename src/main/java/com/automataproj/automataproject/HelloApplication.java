@@ -63,12 +63,12 @@ public class HelloApplication extends Application {
         af.ajouterEtat("s1", TypeEtat.INIT);
         af.ajouterEtat("s2", TypeEtat.FINAL);
         af.ajouterEtat("s3", TypeEtat.FINAL);
-        af.ajouterEtat("s4", TypeEtat.INIT);
         af.setAlphabet(List.of('0', '1'));
         af.ajouterTransition("s1", '0', "s2");
         af.ajouterTransition("s2", '0', "s1");
         af.ajouterTransition("s1", '1', "s1");
         af.ajouterTransition("s2", '1', "s2");
+        af.ajouterTransition("s3", '\0', "s3");
 
 //        af.ajouterEtat("1", TypeEtat.INIT);
 //        af.ajouterEtat("2", TypeEtat.MID);
@@ -82,6 +82,7 @@ public class HelloApplication extends Application {
 
         // System.out.println(af.reconnaissanceMot("0001"));
 
+//        af.printAutomate("automatePNG/test2.png");
 //        af.printAutomate("automatePNG/test.png");
         launch(args);
     }

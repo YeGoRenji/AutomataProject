@@ -28,9 +28,9 @@ public class AFND extends AutomateFini {
             System.err.println("L'un des etat inexsitante !");
             return;
         }
-        if (!alphabet.contains(c))
+        if (!alphabet.contains(c) && c != '\0')
         {
-            System.err.println("Character n'appartient pas au alphabet d'AFD");
+            System.err.println("Character n'appartient pas au alphabet d'AFND");
             return;
         }
         etatDep.addTransition(c, etatArr);

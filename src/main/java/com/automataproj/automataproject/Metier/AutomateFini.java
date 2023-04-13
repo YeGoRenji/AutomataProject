@@ -69,7 +69,7 @@ public abstract class AutomateFini {
                         node(etat.getIdEtat())
                         .link(
                             to(node(etatSort.getIdEtat()))
-                                    .with(Label.of(character.toString()))
+                                    .with(Label.of(character != '\0' ? character.toString() : "ε"))
                         )
                     );
                 }
