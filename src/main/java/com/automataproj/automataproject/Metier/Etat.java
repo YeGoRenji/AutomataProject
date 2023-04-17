@@ -81,7 +81,11 @@ public class Etat {
         return transitionSortants;
     }
 
-    public boolean isFinal()
+    public void setTransitionSortants(HashMap<Character, List<Etat>> transitionSortants) {
+		this.transitionSortants = transitionSortants;
+	}
+
+	public boolean isFinal()
     {
         return (type == TypeEtat.FINAL || type == TypeEtat.INIT_FINAL);
     }

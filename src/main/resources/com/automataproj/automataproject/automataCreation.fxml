@@ -8,7 +8,7 @@
    <children>
       <SplitPane dividerPositions="0.1724598930481283" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxWidth="100.0" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;">
+          <AnchorPane maxWidth="100.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;">
                <children>
                   <ToolBar orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <items>
@@ -23,6 +23,11 @@
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                            <children>
                               <Button mnemonicParsing="false" text="Transition" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <Button fx:id="complementId" text="Complémentaire"/>
                            </children>
                         </HBox>
                      </items>

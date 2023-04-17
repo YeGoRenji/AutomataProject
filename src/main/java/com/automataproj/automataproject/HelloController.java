@@ -5,7 +5,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+
 public class HelloController {
+	
     @FXML
     public TextField textToOutput;
     @FXML
@@ -16,4 +18,5 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText(welcomeText.getText() + textToOutput.getText());
     }
+
 }

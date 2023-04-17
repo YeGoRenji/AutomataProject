@@ -8,6 +8,7 @@ module com.automataproj.automataproject {
     requires org.kordamp.bootstrapfx.core;
     requires guru.nidi.graphviz;
     requires java.desktop;
+	requires javafx.graphics;
 
     opens com.automataproj.automataproject to javafx.fxml;
     exports com.automataproj.automataproject;

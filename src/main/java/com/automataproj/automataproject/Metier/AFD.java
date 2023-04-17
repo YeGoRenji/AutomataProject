@@ -1,7 +1,5 @@
 package com.automataproj.automataproject.Metier;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AFD extends AutomateFini {
@@ -10,6 +8,7 @@ public class AFD extends AutomateFini {
     {
 
     }
+    
 
     public static List<Etat> delta(Character c, Etat q)
     {
@@ -89,7 +88,39 @@ public class AFD extends AutomateFini {
                 return false;
             }
         }
-
+        System.out.println("M --->" + etatsInit.get(0).getNextState('1'));
         return (deltaStar(mot, etatsInit.get(0)).isFinal());
     }
+    
+    public AFD ComplementAFD() {   	
+    	AFD complementM = new AFD();
+    	complementM.setAlphabet(alphabet);
+    	for (Etat e : this.etats) {
+    		complementM.ajouterEtat(e.getIdEtat(),getTypeComplement(e));
+    	}
+    	for (Etat e : this.etats)
+    	{
+    		e.getTransitionSortants().forEach((character, etatSortants) -> {
+    			complementM.ajouterTransition(e.getIdEtat(), character, complementM.findEtat(etatSortants.get(0).getIdEtat()).getIdEtat());
+    		});   
+    	}
+    	return complementM;
+    }
+ 
+	 private TypeEtat getTypeComplement(Etat etat) {
+		 
+		if(!etat.isFinal())
+		{
+			if(etat.getType()==TypeEtat.INIT)
+				return TypeEtat.INIT_FINAL;
+			return TypeEtat.FINAL;
+		}
+		else
+		{
+			if(etat.getType()==TypeEtat.INIT_FINAL)
+				return TypeEtat.INIT;
+			return TypeEtat.MID;
+		}
+	 }
+   
 }

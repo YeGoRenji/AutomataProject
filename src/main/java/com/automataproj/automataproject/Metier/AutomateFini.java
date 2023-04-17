@@ -37,11 +37,11 @@ public abstract class AutomateFini {
         alphabet = new ArrayList<>();
     }
 
-    public void setAlphabet(List<Character> alphabet) {
+	public void setAlphabet(List<Character> alphabet) {
         this.alphabet = alphabet;
     }
 
-    protected Etat findEtat(String idEtat)
+	public Etat findEtat(String idEtat)
     {
         for (Etat e: etats) {
             if (e.getIdEtat().equals(idEtat))
