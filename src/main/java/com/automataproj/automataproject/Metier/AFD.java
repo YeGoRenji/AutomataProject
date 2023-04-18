@@ -88,20 +88,44 @@ public class AFD extends AutomateFini {
                 return false;
             }
         }
-        System.out.println("M --->" + etatsInit.get(0).getNextState('1'));
         return (deltaStar(mot, etatsInit.get(0)).isFinal());
+    }
+    
+    public boolean reconnaissanceMotUnion(String mot)
+    {
+        for (char c: mot.toCharArray()) {
+            if (!alphabet.contains(c))
+            {
+                System.err.println("Un character n'existe pas dans l'alphabet !");
+                return false;
+            }
+        }
+        return (deltaStar(mot, etatsInit.get(0)).isFinalUnion());
+    }
+    public boolean reconnaissanceMotIntersect(String mot)
+    {
+        for (char c: mot.toCharArray()) {
+            if (!alphabet.contains(c))
+            {
+                System.err.println("Un character n'existe pas dans l'alphabet !");
+                return false;
+            }
+        }
+        return (deltaStar(mot, etatsInit.get(0)).isFinalIntersect());
     }
     
     public AFD ComplementAFD() {   	
     	AFD complementM = new AFD();
     	complementM.setAlphabet(alphabet);
-    	for (Etat e : this.etats) {
+    	for (Etat e : this.etats)
+    	{
     		complementM.ajouterEtat(e.getIdEtat(),getTypeComplement(e));
     	}
     	for (Etat e : this.etats)
     	{
     		e.getTransitionSortants().forEach((character, etatSortants) -> {
-    			complementM.ajouterTransition(e.getIdEtat(), character, complementM.findEtat(etatSortants.get(0).getIdEtat()).getIdEtat());
+    			complementM.ajouterTransition(e.getIdEtat(), character, 
+    					complementM.findEtat(etatSortants.get(0).getIdEtat()).getIdEtat());
     		});   
     	}
     	return complementM;
@@ -121,6 +145,50 @@ public class AFD extends AutomateFini {
 				return TypeEtat.INIT;
 			return TypeEtat.MID;
 		}
+	 }
+	 
+	 public AFD automataProduct(AFD primeM) {
+		 AFD prodM = new AFD();
+		 prodM.setAlphabet(alphabet);
+		 for (Etat e : this.etats)
+		 {
+			 for (Etat pe : primeM.etats)
+			 {
+				 prodM.ajouterEtat(e.getIdEtat() + pe.getIdEtat(), getTypeProduct(e,pe));
+			 }
+		 }
+		 for (Etat etat : this.etats)
+		 {
+			 for (Etat petat : primeM.etats)
+			 {			 
+				 etat.getTransitionSortants().forEach((character, etatSortants) -> {
+					 for (Etat petatSortants : petat.getTransitionSortants().get(character))
+		    			prodM.ajouterTransition(etat.getIdEtat() + petat.getIdEtat(), character, 
+		    					prodM.findEtat(etatSortants.get(0).getIdEtat() + petatSortants.getIdEtat()).getIdEtat());
+		    		});
+			 }
+			 
+		 }
+		 return prodM;
+	 }
+	 
+	 private TypeEtat getTypeProduct(Etat e1, Etat e2) {
+		 
+		 if (e1.isInital() && e2.isInital())
+		 {
+			 if(e1.getType()==TypeEtat.INIT && e2.getType()==TypeEtat.INIT)
+				 return TypeEtat.INIT;
+			 if(e1.getType()==TypeEtat.INIT_FINAL && e2.getType()==TypeEtat.INIT_FINAL)
+				 return TypeEtat.INIT_FINAL_UNION_INTERSECT;		 
+			 return TypeEtat.INIT_FINAL; 
+		 }
+		 if (e1.isFinal() || e2.isFinal())
+		 {
+			 if(e1.getType()==TypeEtat.FINAL && e2.getType()==TypeEtat.FINAL)
+				 return TypeEtat.FINAL_UNION_INTERSECT;
+			 return TypeEtat.FINAL;
+		 } 
+		 return TypeEtat.MID;
 	 }
    
 }

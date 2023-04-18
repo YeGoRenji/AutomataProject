@@ -81,10 +81,6 @@ public class Etat {
         return transitionSortants;
     }
 
-    public void setTransitionSortants(HashMap<Character, List<Etat>> transitionSortants) {
-		this.transitionSortants = transitionSortants;
-	}
-
 	public boolean isFinal()
     {
         return (type == TypeEtat.FINAL || type == TypeEtat.INIT_FINAL);
@@ -92,5 +88,14 @@ public class Etat {
 
     public boolean isInital() {
         return  (type == TypeEtat.INIT || type == TypeEtat.INIT_FINAL);
+    }
+    
+    public boolean isFinalUnion() {
+    	return (isFinal() || isFinalIntersect());
+    }
+    
+    public boolean isFinalIntersect()
+    {
+        return (type == TypeEtat.FINAL_UNION_INTERSECT || type == TypeEtat.INIT_FINAL_UNION_INTERSECT);
     }
 }

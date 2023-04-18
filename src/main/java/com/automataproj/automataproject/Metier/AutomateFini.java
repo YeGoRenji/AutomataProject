@@ -1,5 +1,6 @@
 package com.automataproj.automataproject.Metier;
 
+import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
@@ -56,11 +57,27 @@ public abstract class AutomateFini {
 
         for (Etat etat : etats)
         {
-            Shape sh = etat.isFinal() ? Shape.DOUBLE_CIRCLE : Shape.CIRCLE;
+            Shape sh ;
 
             if (etat.isInital())
                 g.add(node("").with(Shape.NONE).link(node(etat.getIdEtat())));
-            g.add(node(etat.getIdEtat()).with(sh));
+            if (etat.isFinal())
+            {
+            	sh = Shape.DOUBLE_CIRCLE;
+            	g.add(node(etat.getIdEtat()).with(sh));
+            }
+            else if (etat.isFinalIntersect())
+            {
+            	sh = Shape.DOUBLE_CIRCLE;
+            	g.add(node(etat.getIdEtat()).with(sh,Color.RED));
+            	
+            }
+            else 
+            {
+            	sh = Shape.CIRCLE;
+            	g.add(node(etat.getIdEtat()).with(sh));
+            }
+            
 
             etat.getTransitionSortants().forEach((character, etatSortants) -> {
                 for (Etat etatSort : etatSortants)
