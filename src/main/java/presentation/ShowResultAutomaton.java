@@ -40,7 +40,7 @@ public ShowResultAutomaton(AFD M, Stage stage, String title) {
          Button reconnaissanceBtn = new Button("Reconnaissance");
          Label output = new Label();
          reconnaissanceBtn.setOnAction(event -> {
-        	 if(M.ComplementAFD().reconnaissanceMot(mot.getText()))
+        	 if(M.reconnaissanceMot(mot.getText()))
         		 output.setText("True");
         	 else
         		 output.setText("False");

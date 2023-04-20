@@ -7,9 +7,11 @@ import com.automataproj.automataproject.Metier.AFD;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -39,10 +41,12 @@ public class ImageMirror {
          Button reconnaissanceBtn = new Button("Reconnaissance");
          Label output = new Label();
          reconnaissanceBtn.setOnAction(event -> {
-        	 if(M.ComplementAFD().reconnaissanceMot(mot.getText()))
-        		 output.setText("True");
-        	 else
-        		 output.setText("False");
+        	 Alert a = new Alert(AlertType.WARNING,"J'ai besoin de la fonction de la déterminisation !");
+     		 a.show();
+//        	 if(M.imageMirror.reconnaissanceMot(mot.getText()))
+//        		 output.setText("True");
+//        	 else
+//        		 output.setText("False");
          });
          reconnaissance.getChildren().addAll(mot,reconnaissanceBtn, output);
          reconnaissance.setSpacing(20);
@@ -50,7 +54,7 @@ public class ImageMirror {
          
          root.getChildren().add(reconnaissance);
          
-         stage.setTitle("Complémentaire");
+         stage.setTitle("Image Miroir");
          stage.setScene(scene);
          stage.show();
 	}
