@@ -35,6 +35,11 @@
                               <Button fx:id="complementId" prefWidth="120.0" text="Complémentaire"/>
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <Button fx:id="mirrorId" prefWidth="120.0" text="Image Miroir"/>
+                           </children>
+                        </HBox>
                      </items>
                   </ToolBar>
                </children></AnchorPane>

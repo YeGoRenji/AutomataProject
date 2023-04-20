@@ -4,13 +4,11 @@ import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.engine.Engine;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.engine.Renderer;
 import guru.nidi.graphviz.model.MutableGraph;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +40,10 @@ public abstract class AutomateFini {
         this.alphabet = alphabet;
     }
 
+	public List<Character> getAlphabet() {
+		return alphabet;
+	}
+
 	public Etat findEtat(String idEtat)
     {
         for (Etat e: etats) {
@@ -69,8 +71,7 @@ public abstract class AutomateFini {
             else if (etat.isFinalIntersect())
             {
             	sh = Shape.DOUBLE_CIRCLE;
-            	g.add(node(etat.getIdEtat()).with(sh,Color.RED));
-            	
+            	g.add(node(etat.getIdEtat()).with(sh,Color.RED));          	
             }
             else 
             {

@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -18,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import presentation.AutomataProduct;
 import presentation.Complement;
+import presentation.ImageMirror;
+import presentation.ShowResultAutomaton;
 
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -26,8 +30,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class HelloApplication extends Application {
-    static AFD af = new AFD();
-    static AFD primeM = new AFD();
+    static AFD af = new AFD(); // pour test
+    static AFD primeM = new AFD(); // pour test
+    static AFD afd = new AFD(); // pour test
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -46,7 +51,7 @@ public class HelloApplication extends Application {
         Pane p = (Pane) scene.lookup("#paneId");
 
         // To Print Automate on Screen !
-        BufferedImage img = af.getAutomateImage().toImage();
+        BufferedImage img = afd.getAutomateImage().toImage();
         ImageView imgview = new ImageView(SwingFXUtils.toFXImage(img, null));
         imgview.setPreserveRatio(true);
         imgview.fitWidthProperty().bind(p.widthProperty());
@@ -64,14 +69,25 @@ public class HelloApplication extends Application {
         
         Button productBtn = (Button) scene.lookup("#productId");
         productBtn.setOnAction(event -> {
-        	Stage stageProduct = new Stage();
-        	new AutomataProduct(af, primeM, stageProduct);
+        	Stage stageProduct = new Stage();    	
+    		new AutomataProduct(af, primeM, stageProduct);
         });
         
         Button complementBtn = (Button) scene.lookup("#complementId");
         complementBtn.setOnAction(event -> {
         	Stage stageComplement = new Stage();
-        	new Complement(af, stageComplement);
+        	// if (AFND)
+        	// 	Déterminisation();
+        	new ShowResultAutomaton(afd.ComplementAFD(), stageComplement, "Complémentaire");
+        });
+        
+        Button mirrorBtn = (Button) scene.lookup("#mirrorId");
+        mirrorBtn.setOnAction(event -> {
+        	Stage stageMirror = new Stage();
+        	// if (AFND)
+        	// 	Déterminisation();
+//        	new ShowResultAutomaton(Déterminisation(), stageMirror, "Image miroir");
+        	new ImageMirror(afd, stageMirror);
         });
 
     }
@@ -116,6 +132,17 @@ public class HelloApplication extends Application {
         primeM.ajouterTransition("1", '1', "0");
         primeM.ajouterTransition("0", '1', "0");
         primeM.ajouterTransition("1", '0', "1");
+        
+        // Test Image Miroir
+        afd.setAlphabet(List.of('a','b'));
+        afd.ajouterEtat("0", TypeEtat.INIT);
+        afd.ajouterEtat("1",TypeEtat.MID);
+        afd.ajouterEtat("2", TypeEtat.FINAL);
+        afd.ajouterTransition("0",'b',"0");
+        afd.ajouterTransition("0",'a',"1");
+        afd.ajouterTransition("1",'b',"2");
+        afd.ajouterTransition("2",'a',"2");
+        afd.ajouterTransition("2",'b',"2");
 
 
 //        System.out.println(af.reconnaissanceMot("00010"));
