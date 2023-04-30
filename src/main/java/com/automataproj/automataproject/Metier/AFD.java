@@ -114,7 +114,7 @@ public class AFD extends AutomateFini {
     	}
     	List <Etat> etats=this.differennce(this.etats, q);
     	af.setEtats(etats);
-    	
+    	//divi
     	
     	//division:
     	List <Etat> etatsFinaux = af.etatsFinal();
