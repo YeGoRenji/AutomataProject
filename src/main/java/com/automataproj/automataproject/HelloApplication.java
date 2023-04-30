@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class HelloApplication extends Application {
-    static AFND af = new AFND();
+    static AFD af = new AFD();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -60,15 +60,29 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) throws IOException {
 
-        af.ajouterEtat("s1", TypeEtat.INIT);
-        af.ajouterEtat("s2", TypeEtat.FINAL);
-        af.ajouterEtat("s3", TypeEtat.FINAL);
-        af.setAlphabet(List.of('0', '1'));
-        af.ajouterTransition("s1", '0', "s2");
-        af.ajouterTransition("s2", '0', "s1");
-        af.ajouterTransition("s1", '1', "s1");
-        af.ajouterTransition("s2", '1', "s2");
-        af.ajouterTransition("s3", '\0', "s3");
+        af.ajouterEtat("1", TypeEtat.INIT_FINAL);
+        af.ajouterEtat("2", TypeEtat.FINAL);
+        af.ajouterEtat("3", TypeEtat.MID);
+        af.ajouterEtat("4", TypeEtat.MID);
+        af.ajouterEtat("5", TypeEtat.MID);
+        af.ajouterEtat("7", TypeEtat.MID);
+        af.ajouterEtat("6", TypeEtat.MID);
+        af.setAlphabet(List.of('b','a'));
+        af.ajouterTransition("1", 'a', "2");
+        af.ajouterTransition("1", 'b', "5");
+        af.ajouterTransition("2", 'a', "2");
+        af.ajouterTransition("2", 'b', "4");
+        af.ajouterTransition("3", 'a', "3");
+        af.ajouterTransition("3", 'b', "2");
+        af.ajouterTransition("4", 'a', "5");
+        af.ajouterTransition("4", 'b', "3");
+        af.ajouterTransition("5", 'a', "4");
+        af.ajouterTransition("5", 'b', "6");
+        af.ajouterTransition("6", 'a', "6");
+        af.ajouterTransition("6", 'b', "1");
+        af.ajouterTransition("7", 'a', "5");
+        //af.ajouterTransition("7", 'b', "7");
+        af=af.minimiser();
 
 //        af.ajouterEtat("1", TypeEtat.INIT);
 //        af.ajouterEtat("2", TypeEtat.MID);

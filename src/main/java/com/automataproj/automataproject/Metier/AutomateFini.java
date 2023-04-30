@@ -28,6 +28,8 @@ public abstract class AutomateFini {
     protected List<Etat> etatsInit;
 
     protected List<Etat> etatsFinal;
+    
+    static  int dernierId=0;
 
     public AutomateFini()
     {
@@ -40,8 +42,17 @@ public abstract class AutomateFini {
     public void setAlphabet(List<Character> alphabet) {
         this.alphabet = alphabet;
     }
+    
 
-    protected Etat findEtat(String idEtat)
+    public List<Etat> getEtats() {
+		return etats;
+	}
+
+	public void setEtats(List<Etat> etats) {
+		this.etats = etats;
+	}
+
+	protected Etat findEtat(String idEtat)
     {
         for (Etat e: etats) {
             if (e.getIdEtat().equals(idEtat))
@@ -87,7 +98,37 @@ public abstract class AutomateFini {
 
         getAutomateImage().toFile(new File(filePath));
     }
-
+    
+    public List<Etat> etatsFinal(){
+    	ArrayList <Etat> finale=new ArrayList <Etat>();
+    	for(Etat e : this.etats) {
+    		if(e.isFinal())
+    			finale.add(e);
+    	}
+    	return finale;
+    }
+    
+    public List<Etat> etatsInitial()
+    {
+    	ArrayList <Etat> finale=new ArrayList <Etat>();
+    	for(Etat e : this.etats) {
+    		if(e.isInital())
+    			finale.add(e);
+    	}
+    	return finale;
+    }
+    
+    public List<Etat> differennce(List <Etat> e, List <Etat> f){
+    	ArrayList <Etat> res=new ArrayList <Etat>(e);
+    	res.removeAll(f);
+    	return res;
+    }
+    
+    public String genererId() {
+    	//dernierId = 0;
+    	    dernierId++;
+    	    return "q" + dernierId;
+    }
     public abstract void ajouterEtat(String idEtat, TypeEtat type);
     public abstract void ajouterTransition(String idEtatDepart, Character c, String idEtatArrive);
 }
