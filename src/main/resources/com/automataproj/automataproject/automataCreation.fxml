@@ -14,7 +14,7 @@
                      <items>
                         <HBox alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="State" />
+                              <Button onAction="#onClickState" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="State" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -22,7 +22,7 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Transition" />
+                              <Button onAction="#onClickTransition" mnemonicParsing="false" text="Transition" />
                            </children>
                         </HBox>
                      </items>
@@ -30,7 +30,7 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                   <Pane fx:id="paneId" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                   <Pane fx:id="mainPane" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

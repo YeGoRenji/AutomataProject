@@ -11,4 +11,5 @@ module com.automataproj.automataproject {
 
     opens com.automataproj.automataproject to javafx.fxml;
     exports com.automataproj.automataproject;
+    exports com.automataproj.automataproject.Components;
 }

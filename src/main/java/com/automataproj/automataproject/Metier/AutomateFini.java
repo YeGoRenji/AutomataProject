@@ -3,13 +3,11 @@ package com.automataproj.automataproject.Metier;
 import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.engine.Engine;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.engine.Renderer;
 import guru.nidi.graphviz.model.MutableGraph;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +40,18 @@ public abstract class AutomateFini {
     public void setAlphabet(List<Character> alphabet) {
         this.alphabet = alphabet;
     }
-    
+
+    public List<Character> getAlphabet() {
+        return alphabet;
+    }
+
+    public String getIdAutomate() {
+        return idAutomate;
+    }
+
+    public void setIdAutomate(String idAutomate) {
+        this.idAutomate = idAutomate;
+    }
 
     public List<Etat> getEtats() {
 		return etats;
@@ -52,7 +61,7 @@ public abstract class AutomateFini {
 		this.etats = etats;
 	}
 
-	protected Etat findEtat(String idEtat)
+	public Etat findEtat(String idEtat)
     {
         for (Etat e: etats) {
             if (e.getIdEtat().equals(idEtat))
@@ -129,6 +138,6 @@ public abstract class AutomateFini {
     	    dernierId++;
     	    return "q" + dernierId;
     }
-    public abstract void ajouterEtat(String idEtat, TypeEtat type);
-    public abstract void ajouterTransition(String idEtatDepart, Character c, String idEtatArrive);
+    public abstract String ajouterEtat(String idEtat, TypeEtat type);
+    public abstract String ajouterTransition(String idEtatDepart, Character c, String idEtatArrive);
 }

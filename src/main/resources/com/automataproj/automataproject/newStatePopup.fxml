@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.GridPane.*?>
+<?import org.kordamp.bootstrapfx.scene.layout.Panel?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import com.automataproj.automataproject.Components.*?>
+<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.PopupStateController">
+   <Panel prefWidth="750.0" prefHeight="400.0" styleClass="panel-primary">
+      <heading>
+         <Label styleClass="h3" text="Nouvelle état :" >
+            <font>
+               <Font name="Roboto Light" size="20.0" />
+            </font>
+         </Label>
+      </heading>
+      <body>
+         <GridPane vgap="30">
+            <LimitedTextField maxLength="8" styleClass="font-medium" promptText="Nom d'état..." prefHeight="30" GridPane.hgrow="NEVER" GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="stateName"/>
+            <CheckBox fx:id="initialCheck" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="2"> Initial </CheckBox>
+            <CheckBox fx:id="finalCheck" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="3"> Final </CheckBox>
+            <HBox spacing="5" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="4">
+               <Button onAction="#onClickAjouter" styleClass="btn, btn-success" text="Ajouter"/>
+               <Button onAction="#onClickCancel" fx:id="cancelBtn" styleClass="btn, btn-default" text="Cancel"/>
+            </HBox>
+         </GridPane>
+      </body>
+      <padding>
+         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      </padding>
+   </Panel>
+   <stylesheets>
+      <URL value="@fontMedium.css"/>
+   </stylesheets>
+</AnchorPane>

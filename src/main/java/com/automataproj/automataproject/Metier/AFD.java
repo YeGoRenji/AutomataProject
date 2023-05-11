@@ -38,48 +38,34 @@ public class AFD extends AutomateFini {
     }
 
     @Override
-    public void ajouterEtat(String idEtat, TypeEtat type) {
+    public String ajouterEtat(String idEtat, TypeEtat type) {
         Etat etat = new Etat(idEtat, type);
 
         if (findEtat(idEtat) != null)
-        {
-            System.err.println("Etat deja existe !");
-            return;
-        }
+            return "Etat deja existe !";
         if (etat.isInital() && etatsInit.size() > 0)
-        {
-            System.err.println("Impossible d'avoir plus qu'une etat initiale pour AFD");
-            return;
-        }
+            return "Impossible d'avoir plus qu'une etat initiale pour AFD";
         etats.add(etat);
         if (etat.isInital())
             etatsInit.add(etat);
         if (etat.isFinal())
             etatsFinal.add(etat);
+        return null;
     }
 
     @Override
-    public void ajouterTransition(String idEtatDepart, Character c, String idEtatArrive)
+    public String ajouterTransition(String idEtatDepart, Character c, String idEtatArrive)
     {
         Etat etatDep = findEtat(idEtatDepart);
         Etat etatArr = findEtat(idEtatArrive);
 
         if (etatArr == null || etatDep == null)
-        {
-            System.err.println("L'un des etat inexsitante !");
-            return;
-        }
+            return "L'un des etat inexsitante !";
         if (!alphabet.contains(c))
-        {
-            System.err.println("Character n'appartient pas au alphabet d'AFD");
-            return;
-        }
+            return "Character n'appartient pas au alphabet d'AFD";
         if (etatDep.getNextState(c) != null)
-        {
-            System.err.println("AFD : Transition deja exist avec le symbole (" + c + ")  !");
-            return;
-        }
-        etatDep.addTransition(c, etatArr);
+            return "AFD : Transition deja exist avec le symbole (" + c + ")  !";
+        return etatDep.addTransition(c, etatArr);
     }
 
     public boolean reconnaissanceMot(String mot)

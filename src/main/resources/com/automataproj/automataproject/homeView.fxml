@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.HomeController">
+   <children>
+      <VBox fx:id="automateList" layoutX="97.0" layoutY="34.0" prefHeight="246.0" prefWidth="405.0" />
+      <HBox alignment="CENTER" layoutX="97.0" layoutY="293.0" prefHeight="80.0" prefWidth="406.0" spacing="30.0">
+         <children>
+            <Button onAction="#onNewAutomata" mnemonicParsing="false" text="Nouveau Automate" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

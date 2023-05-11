@@ -12,28 +12,25 @@ public class Etat {
     public Etat() {
     	super();
     }
-//    private HashMap<>
     public Etat(String idEtat, TypeEtat type) {
         this.idEtat = idEtat;
         this.type = type;
         transitionSortants = new HashMap<>();
     }
 
-    public void addTransition(Character symbol, Etat etatSuivante)
+    public String addTransition(Character symbol, Etat etatSuivante)
     {
         List<Etat> etats;
         if (transitionSortants.containsKey(symbol)) {
             if (transitionSortants.get(symbol).contains(etatSuivante))
-            {
-                System.err.println("Même transition déja Existe !");
-                return;
-            }
+                return "Même transition déja Existe !";
             transitionSortants.get(symbol).add(etatSuivante);
-            return;
+            return null;
         }
         etats = new ArrayList<>();
         etats.add(etatSuivante);
         transitionSortants.put(symbol, etats);
+        return null;
     }
 
     public List<Etat> getNextState(Character symbol)
