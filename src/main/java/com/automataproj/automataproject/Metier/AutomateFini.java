@@ -19,6 +19,8 @@ import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.model.Factory.*;
 
 public abstract class AutomateFini {
+
+    public static final char EPSILON = '\0';
     protected String idAutomate;
 
     protected List<Character> alphabet;
@@ -37,11 +39,21 @@ public abstract class AutomateFini {
         alphabet = new ArrayList<>();
     }
 
+    public List<Etat> getEtats(){
+        return etats;
+    }
+    public List<Etat> getEtatsInit(){
+        return etatsInit;
+    }
+
+    public List<Character> getAlphabet(){
+        return this.alphabet;
+    }
     public void setAlphabet(List<Character> alphabet) {
         this.alphabet = alphabet;
     }
 
-    protected Etat findEtat(String idEtat)
+    public Etat findEtat(String idEtat)
     {
         for (Etat e: etats) {
             if (e.getIdEtat().equals(idEtat))
@@ -90,4 +102,15 @@ public abstract class AutomateFini {
 
     public abstract void ajouterEtat(String idEtat, TypeEtat type);
     public abstract void ajouterTransition(String idEtatDepart, Character c, String idEtatArrive);
+
+
+    public Etat getEtatParId(String IdEtat) {
+        for (Etat etat : this.etats) {
+            if (etat.getIdEtat().equals(IdEtat)) {
+                return etat;
+            }
+        }
+        // Si l'état n'a pas été trouvé, renvoyer null ou lever une exception
+        return null;
+    }
 }

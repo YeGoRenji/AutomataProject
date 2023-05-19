@@ -24,6 +24,7 @@ import java.util.List;
 
 public class HelloApplication extends Application {
     static AFND af = new AFND();
+    static AFD afd = new AFD();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -41,7 +42,7 @@ public class HelloApplication extends Application {
         Pane p = (Pane) scene.lookup("#paneId");
 
         // To Print Automate on Screen !
-        BufferedImage img = af.getAutomateImage().toImage();
+        BufferedImage img = afd.getAutomateImage().toImage();
         ImageView imgview = new ImageView(SwingFXUtils.toFXImage(img, null));
         imgview.setPreserveRatio(true);
         imgview.fitWidthProperty().bind(p.widthProperty());
@@ -60,30 +61,38 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) throws IOException {
 
-        af.ajouterEtat("s1", TypeEtat.INIT);
-        af.ajouterEtat("s2", TypeEtat.FINAL);
-        af.ajouterEtat("s3", TypeEtat.FINAL);
+
+        /*af.ajouterEtat("s1", TypeEtat.FINAL);
+        af.ajouterEtat("s2", TypeEtat.INIT);
         af.setAlphabet(List.of('0', '1'));
         af.ajouterTransition("s1", '0', "s2");
         af.ajouterTransition("s2", '0', "s1");
         af.ajouterTransition("s1", '1', "s1");
         af.ajouterTransition("s2", '1', "s2");
-        af.ajouterTransition("s3", '\0', "s3");
+        af.printAutomate("automatePNG/test3.png");*/
+       af.ajouterEtat("1", TypeEtat.INIT_FINAL);
+       af.ajouterEtat("2", TypeEtat.FINAL);
+       af.ajouterEtat("3", TypeEtat.INIT);
+       af.setAlphabet(List.of('a', 'b'));
+       af.ajouterTransition("1", 'a', "2");
+       af.ajouterTransition("1", 'a', "1");
+       af.ajouterTransition("1", 'b', "2");
+       af.ajouterTransition("2", 'a', "1");
+       af.ajouterTransition("2", 'b', "2");
+       af.ajouterTransition("2", 'b', "3");
+       af.ajouterTransition("3", 'a', "2");
+       //af.ajouterTransition("3", AutomateFini.EPSILON, "3");
+        //List <String> tous = af.generateAcceptedWords(af,4);
+        //System.out.println("tous les mots acceptés :"+ tous);
+        afd = af.determiniser();
 
-//        af.ajouterEtat("1", TypeEtat.INIT);
-//        af.ajouterEtat("2", TypeEtat.MID);
-//        af.ajouterEtat("3", TypeEtat.FINAL);
-//        af.setAlphabet(List.of('a', 'b'));
-//        af.ajouterTransition("1", 'a', "2");
-//        af.ajouterTransition("2", 'b', "3");
-//        af.ajouterTransition("3", 'a', "3");
-//        af.ajouterTransition("3", 'b', "3");
 
 
         // System.out.println(af.reconnaissanceMot("0001"));
 
 //        af.printAutomate("automatePNG/test2.png");
 //        af.printAutomate("automatePNG/test.png");
+
         launch(args);
     }
 }

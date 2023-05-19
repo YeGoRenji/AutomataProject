@@ -10,6 +10,9 @@ public class Etat {
     private HashMap<Character, List<Etat>> transitionSortants;
 
 //    private HashMap<>
+
+    public Etat() {
+    }
     public Etat(String idEtat, TypeEtat type) {
         this.idEtat = idEtat;
         this.type = type;

@@ -1,8 +1,7 @@
 package com.automataproj.automataproject.Metier;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AFD extends AutomateFini {
 
@@ -92,4 +91,54 @@ public class AFD extends AutomateFini {
 
         return (deltaStar(mot, etatsInit.get(0)).isFinal());
     }
+
+    /*public int compterMotsAcceptes(AFD afd, int limite, Etat etatInitial) {
+        int compteur = 0;
+        Stack<Etat> etatsCourants = new Stack<>();
+        etatsCourants.push(etatInitial);
+        while (!etatsCourants.empty()) {
+            Etat etatCourant = etatsCourants.pop();
+            if (etatCourant.isFinal()) {
+                compteur++;
+            }
+            if (limite > 0) {
+                for (char symbole : afd.getAlphabet()) {
+                    Etat etatSuivant = etatCourant.getNextState(symbole).get(0);
+                        etatsCourants.push(etatSuivant);
+                }
+            }
+                limite--;
+        }
+        return compteur;
+    }
+    */
+
+    public List<String> generateAcceptedWords(AFD afd, int maxLength) {
+        List<String> acceptedWords = new ArrayList<>();
+        generateAcceptedWordsHelper(afd, afd.getEtatsInit().get(0), "", maxLength, acceptedWords);
+        return acceptedWords;
+    }
+
+    private void generateAcceptedWordsHelper(AFD afd, Etat currentState, String currentWord, int maxLength, List<String> acceptedWords) {
+        if (reconnaissanceMot(currentWord) && currentWord.length() <= maxLength) {
+            acceptedWords.add(currentWord);
+        }
+        if (currentWord.length() < maxLength) {
+            /*for (char c : afd.getAlphabet()) {
+                Etat nextState = currentState.getNextState(c).get(0);
+                generateAcceptedWordsHelper(afd, nextState, currentWord + c, maxLength, acceptedWords);}
+                */
+            currentState.getTransitionSortants().forEach((c, etatsSortants) -> {
+                generateAcceptedWordsHelper(afd, etatsSortants.get(0) , currentWord + c, maxLength , acceptedWords);
+            });
+
+        }
+
+
+
+    }
+
+
+
+
 }
