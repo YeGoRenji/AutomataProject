@@ -1,6 +1,7 @@
 package com.automataproj.automataproject.Metier;
 
 import java.util.List;
+import java.util.*;
 
 public class AFD extends AutomateFini {
 
@@ -160,7 +161,7 @@ public class AFD extends AutomateFini {
     	return TypeEtat.MID;
     }
     
-private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
+	private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
     	
     	if (e1.isInital() && e2.isInital())
     	{
@@ -210,8 +211,7 @@ private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
 			return TypeEtat.MID;
 		}
 	 }
-	 
-	 
+	  
 	 public AFND imageMirror() {
 		 AFND primeM = new AFND();
 		 primeM.setAlphabet(alphabet);
@@ -227,6 +227,7 @@ private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
 	    	}
 		 return primeM;
 	 }
+	 
 	 private TypeEtat getTypeMirror(Etat e) {
 		 if(e.isInital()) {
 			 if(e.getType()==TypeEtat.INIT_FINAL)
@@ -239,4 +240,50 @@ private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
 		 return TypeEtat.MID;
 	 }
    
+
+    /*public int compterMotsAcceptes(AFD afd, int limite, Etat etatInitial) {
+        int compteur = 0;
+        Stack<Etat> etatsCourants = new Stack<>();
+        etatsCourants.push(etatInitial);
+        while (!etatsCourants.empty()) {
+            Etat etatCourant = etatsCourants.pop();
+            if (etatCourant.isFinal()) {
+                compteur++;
+            }
+            if (limite > 0) {
+                for (char symbole : afd.getAlphabet()) {
+                    Etat etatSuivant = etatCourant.getNextState(symbole).get(0);
+                        etatsCourants.push(etatSuivant);
+                }
+            }
+                limite--;
+        }
+        return compteur;
+    }
+    */
+
+    public List<String> generateAcceptedWords(AFD afd, int maxLength) {
+        List<String> acceptedWords = new ArrayList<>();
+        generateAcceptedWordsHelper(afd, afd.getEtatsInit().get(0), "", maxLength, acceptedWords);
+        return acceptedWords;
+    }
+
+    private void generateAcceptedWordsHelper(AFD afd, Etat currentState, String currentWord, int maxLength, List<String> acceptedWords) {
+        if (reconnaissanceMot(currentWord) && currentWord.length() <= maxLength) {
+            acceptedWords.add(currentWord);
+        }
+        if (currentWord.length() < maxLength) {
+            /*for (char c : afd.getAlphabet()) {
+                Etat nextState = currentState.getNextState(c).get(0);
+                generateAcceptedWordsHelper(afd, nextState, currentWord + c, maxLength, acceptedWords);}
+                */
+            currentState.getTransitionSortants().forEach((c, etatsSortants) -> {
+                generateAcceptedWordsHelper(afd, etatsSortants.get(0) , currentWord + c, maxLength , acceptedWords);
+            });
+
+        }
+
+
+
+    }
 }

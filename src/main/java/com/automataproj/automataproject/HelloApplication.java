@@ -18,11 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import presentation.Complement;
-import presentation.ImageMirror;
-import presentation.IntersectAutomata;
 import presentation.ShowResultAutomaton;
-import presentation.UnionAutomata;
+import presentation.showAutomataProduct;
 
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -31,9 +28,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class HelloApplication extends Application {
-    static AFD af = new AFD(); // pour test
-    static AFD primeM = new AFD(); // pour test
-    static AFD afd = new AFD(); // pour test
+    static AutomateFini af = new AFD(); // pour test
+    static AutomateFini primeM = new AFD(); // pour test
+    static AutomateFini afd = new AFD(); // pour test
+//    static AFND afn = new AFND();
+    static AFD afDeterminisation = new AFD();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -52,7 +51,7 @@ public class HelloApplication extends Application {
         Pane p = (Pane) scene.lookup("#paneId");
 
         // To Print Automate on Screen !
-        BufferedImage img = afd.getAutomateImage().toImage();
+        BufferedImage img = af.getAutomateImage().toImage();
         ImageView imgview = new ImageView(SwingFXUtils.toFXImage(img, null));
         imgview.setPreserveRatio(true);
         imgview.fitWidthProperty().bind(p.widthProperty());
@@ -68,34 +67,35 @@ public class HelloApplication extends Application {
 //            canvas.getGraphicsContext2D().fillOval(event.getX() - 25, event.getY() - 25, 50, 50);
 //        });
         
+        if (af instanceof AFND)
+        	afDeterminisation = ((AFND) af).determiniser();
+        else
+        	afDeterminisation = (AFD) af;
+        
         Button unionBtn = (Button) scene.lookup("#unionId");
         unionBtn.setOnAction(event -> {
         	Stage stageProduct = new Stage();    	
-    		new UnionAutomata(af, primeM, stageProduct);
+    		new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "union");
         });
         
         Button intersectBtn = (Button) scene.lookup("#intersectId");
         intersectBtn.setOnAction(event -> {
         	Stage stageProduct = new Stage();    	
-    		new IntersectAutomata(af, primeM, stageProduct);
+    		new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
         });
         
         
         Button complementBtn = (Button) scene.lookup("#complementId");
         complementBtn.setOnAction(event -> {
         	Stage stageComplement = new Stage();
-        	// if (AFND)
-        	// 	Déterminisation();
-        	new ShowResultAutomaton(afd.ComplementAFD(), stageComplement, "Complémentaire");
+        	new ShowResultAutomaton(afDeterminisation.ComplementAFD(), stageComplement, "Complémentaire");
         });
         
         Button mirrorBtn = (Button) scene.lookup("#mirrorId");
         mirrorBtn.setOnAction(event -> {
         	Stage stageMirror = new Stage();
-        	// if (AFND)
-        	// 	Déterminisation();
-//        	new ShowResultAutomaton(Déterminisation(), stageMirror, "Image miroir");
-        	new ImageMirror(afd, stageMirror);
+        	AFD imgDeterminisation = afDeterminisation.imageMirror().determiniser();
+        	new ShowResultAutomaton(imgDeterminisation, stageMirror, "Image miroir");
         });
 
     }
@@ -151,6 +151,44 @@ public class HelloApplication extends Application {
         afd.ajouterTransition("1",'b',"2");
         afd.ajouterTransition("2",'a',"2");
         afd.ajouterTransition("2",'b',"2");
+
+//        af.ajouterEtat("s1", TypeEtat.FINAL);
+//        af.ajouterEtat("s2", TypeEtat.INIT);
+//        af.setAlphabet(List.of('0', '1'));
+//        af.ajouterTransition("s1", '0', "s2");
+//        af.ajouterTransition("s2", '0', "s1");
+//        af.ajouterTransition("s1", '1', "s1");
+//        af.ajouterTransition("s2", '1', "s2");
+//        af.printAutomate("automatePNG/test3.png");
+
+//       af.ajouterEtat("1", TypeEtat.INIT_FINAL);
+//       af.ajouterEtat("2", TypeEtat.FINAL);
+//       af.ajouterEtat("3", TypeEtat.INIT);
+//       af.setAlphabet(List.of('a', 'b'));
+//       af.ajouterTransition("1", 'a', "2");
+//       af.ajouterTransition("1", 'a', "1");
+//       af.ajouterTransition("1", 'b', "2");
+//       af.ajouterTransition("2", 'a', "1");
+//       af.ajouterTransition("2", 'b', "2");
+//       af.ajouterTransition("2", 'b', "3");
+//       af.ajouterTransition("3", 'a', "2");
+       
+       
+//        af.ajouterEtat("0", TypeEtat.INIT);
+//       af.ajouterEtat("1", TypeEtat.MID);
+//       af.ajouterEtat("2", TypeEtat.FINAL);
+//       af.setAlphabet(List.of('a', 'b'));
+//       af.ajouterTransition("0", 'a', "0");
+//       af.ajouterTransition("0", 'b', "0");
+//       af.ajouterTransition("0", 'a', "1");
+//       af.ajouterTransition("1", 'b', "2");
+//       af.ajouterTransition("2", 'b', "2");
+//       af.ajouterTransition("2", 'a', "2");
+       
+       //af.ajouterTransition("3", AutomateFini.EPSILON, "3");
+        //List <String> tous = af.generateAcceptedWords(af,4);
+        //System.out.println("tous les mots acceptés :"+ tous);
+
 
 
 //        System.out.println(af.reconnaissanceMot("00010"));

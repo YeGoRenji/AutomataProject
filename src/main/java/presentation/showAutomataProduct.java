@@ -12,20 +12,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class UnionAutomata {
+public class showAutomataProduct {
 	
-	public UnionAutomata(AFD M, AFD primeM, Stage stageProduct) {
+	public showAutomataProduct(AFD M, AFD primeM, Stage stageProduct, String operation) {
 		
-	   	 GridPane vpane = new GridPane();
+		GridPane vpane = new GridPane();
 	   	 vpane.setStyle("-fx-background-color: white;");
 
 	         Scene scene2 = new Scene(vpane, 1280, 720);
@@ -74,50 +72,18 @@ public class UnionAutomata {
 	         
 	         constructionBtn.setOnAction(e -> {
 	       	  Stage stageProductConstruction = new Stage();
-	       	  automateProductBtn(M, primeM, stageProductConstruction);  	  
+	       	  automateProductBtn(M, primeM, stageProductConstruction, operation);  	  
 	         });	          
 	        
 		}
 		
-		private void automateProductBtn(AFD M, AFD primeM, Stage stage) {
+		private void automateProductBtn(AFD M, AFD primeM, Stage stage, String operation) {
 			if (M.getAlphabet().equals(primeM.getAlphabet()))
 			{
-				VBox root = new VBox();
-		    	root.setStyle("-fx-background-color: white;");
-		    	Scene scene = new Scene(root, 1280, 720);
-		    	
-		    	Pane p = new Pane();
-		    	p.setStyle("-fx-background-color: white;");
-		         ImageView imgview = automateImage(M.unionAutomata(primeM));
-		         imgview.fitWidthProperty().bind(p.widthProperty());
-		         imgview.fitHeightProperty().bind(p.heightProperty());
-		         p.getChildren().add(imgview);
-		         root.getChildren().add(p);
-		         
-		         VBox nbunion = new VBox();
-		         nbunion.setStyle("-fx-background-color: white;");
-		         nbunion.setPadding(new Insets(50,0,0,50));
-		         
-		         HBox reconnaissance1 = new HBox();
-		         reconnaissance1.setStyle("-fx-background-color: white;");
-		         TextField mot = new TextField();
-		         Button reconnaissanceBtn = new Button("Reconnaissance d'un mot");
-		         Label output = new Label();
-		         reconnaissanceBtn.setOnAction(event -> {
-		        	 if(M.unionAutomata(primeM).reconnaissanceMot(mot.getText()))
-		        		 output.setText("True");
-		        	 else
-		        		 output.setText("False");
-		         });
-		         reconnaissance1.getChildren().addAll(mot,reconnaissanceBtn, output);
-		         reconnaissance1.setSpacing(20);
-		         reconnaissance1.setPadding(new Insets(0,0,50,50));
-		         
-		         root.getChildren().addAll(nbunion,reconnaissance1);
-		         
-		         stage.setTitle("Réunion");
-		         stage.setScene(scene);
-		         stage.show();
+				if(operation.equals("union"))
+					new ShowResultAutomaton(M.unionAutomata(primeM), stage, "Réunion");
+				else
+					new ShowResultAutomaton(M.unionAutomata(primeM), stage, "Intersection");
 			}
 	         else
 	     	{
