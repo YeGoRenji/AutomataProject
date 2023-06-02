@@ -1,6 +1,9 @@
 package com.automataproj.automataproject;
 
+import com.automataproj.automataproject.Metier.AFD;
 import com.automataproj.automataproject.Metier.AFND;
+import com.automataproj.automataproject.Metier.AutomateFini;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -19,7 +23,7 @@ public class AutomataCreation implements Initializable {
     @FXML
     private Pane mainPane;
 
-    private AFND af = new AFND();
+    private AutomateFini af;
 
     private ImageView imgview;
 
@@ -32,8 +36,7 @@ public class AutomataCreation implements Initializable {
                 new Alert(Alert.AlertType.ERROR, errorMsg).show();
             else
                 repaint();
-        }
-        else
+        } else
             System.out.println("it is null !");
     }
 
@@ -46,19 +49,25 @@ public class AutomataCreation implements Initializable {
                 new Alert(Alert.AlertType.ERROR, errorMsg).show();
             else
                 repaint();
-        }
-        else
+        } else
             System.out.println("it is null !");
     }
 
-    private void repaint()
-    {
+    private void repaint() {
         imgview.setImage(SwingFXUtils.toFXImage(af.getAutomateImage().toImage(), null));
+    }
+
+    public void setAf(PopupAutomataReturn returnObj) {
+        af = returnObj.isAFND ? new AFND() : new AFD();
+        af.setAlphabet(returnObj.alphabets);
+        af.setIdAutomate(returnObj.automataName);
+
+        Platform.runLater(() -> ((Stage) mainPane.getScene().getWindow()).setTitle("Creating Automate : " + returnObj.automataName + " " + (returnObj.isAFND ? "(AFND)" : "(AFD)")));
     }
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        af.setIdAutomate("Automate 1");
+//        af.setIdAutomate("Automate 1");
 //        af.ajouterEtat("1", TypeEtat.INIT_FINAL);
 //        af.ajouterEtat("2", TypeEtat.FINAL);
 //        af.ajouterEtat("3", TypeEtat.MID);
@@ -66,7 +75,7 @@ public class AutomataCreation implements Initializable {
 //        af.ajouterEtat("5", TypeEtat.MID);
 //        af.ajouterEtat("7", TypeEtat.MID);
 //        af.ajouterEtat("6", TypeEtat.MID);
-        af.setAlphabet(List.of('b','a'));
+//        af.setAlphabet(List.of('0','1'));
 //        af.ajouterTransition("1", 'a', "2");
 //        af.ajouterTransition("1", 'b', "5");
 //        af.ajouterTransition("2", 'a', "2");
@@ -81,8 +90,8 @@ public class AutomataCreation implements Initializable {
 //        af.ajouterTransition("6", 'b', "1");
 //        af.ajouterTransition("7", 'a', "5");
 
-        BufferedImage img = af.getAutomateImage().toImage();
-        imgview = new ImageView(SwingFXUtils.toFXImage(img, null));
+//        BufferedImage img = af.getAutomateImage().toImage();
+        imgview = new ImageView();
         imgview.setPreserveRatio(true);
         imgview.fitWidthProperty().bind(mainPane.widthProperty());
         imgview.fitHeightProperty().bind(mainPane.heightProperty());

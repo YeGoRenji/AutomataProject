@@ -1,21 +1,23 @@
 package com.automataproj.automataproject;
 
+import com.automataproj.automataproject.Components.AutomataPane;
+import com.automataproj.automataproject.Metier.AFD;
 import com.automataproj.automataproject.Metier.AutomateFini;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class HomeController {
+public class HomeController implements Initializable {
     @FXML
-    private VBox automateList;
+    private ListView<Text> automateList;
 
     List<AutomateFini> listAutomates;
 
@@ -23,16 +25,29 @@ public class HomeController {
     {
         for (AutomateFini automate : list)
         {
-            automateList.getChildren().add(new Text(automate.getIdAutomate()));
+            String type;
+            if (automate instanceof AFD) type = "AFD"; else type = "AFND";
+            Text t = new Text(automate.getIdAutomate() + "      (" + type + ")");
+            automateList.getItems().add(t);
         }
     }
 
     public void onNewAutomata(Event event)
     {
         try {
-            automateList.getScene().setRoot(new FXMLLoader(Home.class.getResource("automataCreation.fxml")).load());
+            PopupAutomataReturn returnObj =  PopupAutomataCreation.display();
+            if (!returnObj.isOk)
+                return;
+            FXMLLoader loader = new FXMLLoader(Home.class.getResource("automataCreation.fxml"));
+            automateList.getScene().setRoot(loader.load());
+            loader.<AutomataCreation>getController().setAf(returnObj);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+//        this.fillVbox(listAutomates);
     }
 }

@@ -19,7 +19,7 @@
       </heading>
       <body>
          <GridPane vgap="30">
-            <HBox GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <HBox spacing="10" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="1">
                <ComboBox HBox.hgrow="ALWAYS" fx:id="startStateCb"/>
                <ComboBox HBox.hgrow="ALWAYS" fx:id="symbolCb"/>
                <ComboBox HBox.hgrow="ALWAYS" fx:id="destStateCb"/>

@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.HomeController">
-   <children>
-      <VBox fx:id="automateList" layoutX="97.0" layoutY="34.0" prefHeight="246.0" prefWidth="405.0" />
-      <HBox alignment="CENTER" layoutX="97.0" layoutY="293.0" prefHeight="80.0" prefWidth="406.0" spacing="30.0">
-         <children>
-            <Button onAction="#onNewAutomata" mnemonicParsing="false" text="Nouveau Automate" />
-         </children>
-      </HBox>
-   </children>
+<?import java.net.URL?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.HomeController">
+    <ListView fx:id="automateList" fixedCellSize="100.0" layoutX="214.0" layoutY="48.0" prefHeight="474.0" prefWidth="850.0" style="-fx-background-color: #eaeaea;" />
+   <HBox alignment="CENTER" layoutX="341.0" layoutY="596.0" prefHeight="80.0" prefWidth="597.0" spacing="30.0">
+         <Button mnemonicParsing="false" onAction="#onNewAutomata" text="Nouveau Automate" />
+   </HBox>
+    <stylesheets>
+        <URL value="@fontMedium.css"/>
+    </stylesheets>
 </AnchorPane>
