@@ -90,12 +90,4 @@ public class Etat {
         return  (type == TypeEtat.INIT || type == TypeEtat.INIT_FINAL);
     }
     
-    public boolean isFinalUnion() {
-    	return (isFinal() || isFinalIntersect());
-    }
-    
-    public boolean isFinalIntersect()
-    {
-        return (type == TypeEtat.FINAL_UNION_INTERSECT || type == TypeEtat.INIT_FINAL_UNION_INTERSECT);
-    }
 }

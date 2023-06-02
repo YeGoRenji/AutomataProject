@@ -18,10 +18,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import presentation.AutomataProduct;
 import presentation.Complement;
 import presentation.ImageMirror;
+import presentation.IntersectAutomata;
 import presentation.ShowResultAutomaton;
+import presentation.UnionAutomata;
 
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -67,11 +68,18 @@ public class HelloApplication extends Application {
 //            canvas.getGraphicsContext2D().fillOval(event.getX() - 25, event.getY() - 25, 50, 50);
 //        });
         
-        Button productBtn = (Button) scene.lookup("#productId");
-        productBtn.setOnAction(event -> {
+        Button unionBtn = (Button) scene.lookup("#unionId");
+        unionBtn.setOnAction(event -> {
         	Stage stageProduct = new Stage();    	
-    		new AutomataProduct(af, primeM, stageProduct);
+    		new UnionAutomata(af, primeM, stageProduct);
         });
+        
+        Button intersectBtn = (Button) scene.lookup("#intersectId");
+        intersectBtn.setOnAction(event -> {
+        	Stage stageProduct = new Stage();    	
+    		new IntersectAutomata(af, primeM, stageProduct);
+        });
+        
         
         Button complementBtn = (Button) scene.lookup("#complementId");
         complementBtn.setOnAction(event -> {

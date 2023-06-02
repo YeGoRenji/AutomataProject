@@ -1,6 +1,5 @@
 package com.automataproj.automataproject.Metier;
 
-import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
@@ -67,11 +66,6 @@ public abstract class AutomateFini {
             {
             	sh = Shape.DOUBLE_CIRCLE;
             	g.add(node(etat.getIdEtat()).with(sh));
-            }
-            else if (etat.isFinalIntersect())
-            {
-            	sh = Shape.DOUBLE_CIRCLE;
-            	g.add(node(etat.getIdEtat()).with(sh,Color.RED));          	
             }
             else 
             {

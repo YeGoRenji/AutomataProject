@@ -91,37 +91,14 @@ public class AFD extends AutomateFini {
         return (deltaStar(mot, etatsInit.get(0)).isFinal());
     }
     
-    public boolean reconnaissanceMotUnion(String mot)
-    {
-        for (char c: mot.toCharArray()) {
-            if (!alphabet.contains(c))
-            {
-                System.err.println("Un character n'existe pas dans l'alphabet !");
-                return false;
-            }
-        }
-        return (deltaStar(mot, etatsInit.get(0)).isFinalUnion());
-    }
-    public boolean reconnaissanceMotIntersect(String mot)
-    {
-        for (char c: mot.toCharArray()) {
-            if (!alphabet.contains(c))
-            {
-                System.err.println("Un character n'existe pas dans l'alphabet !");
-                return false;
-            }
-        }
-        return (deltaStar(mot, etatsInit.get(0)).isFinalIntersect());
-    }
-    
-    public AFD automataProduct(AFD M) {
+    public AFD unionAutomata(AFD M) {
     	AFD prodM = new AFD();
     	prodM.setAlphabet(alphabet);
     	for (Etat e : this.etats)
     	{
     		for (Etat pe : M.etats)
     		{
-    			prodM.ajouterEtat(e.getIdEtat() + pe.getIdEtat(), getTypeProduct(e,pe));
+    			prodM.ajouterEtat(e.getIdEtat() + pe.getIdEtat(), getTypeUnion(e,pe));
     		}
     	}
     	for (Etat etat : this.etats)
@@ -139,21 +116,64 @@ public class AFD extends AutomateFini {
     	return prodM;
     }
     
-    private TypeEtat getTypeProduct(Etat e1, Etat e2) {
+    public AFD intersectAutomata(AFD M) {
+    	AFD prodM = new AFD();
+    	prodM.setAlphabet(alphabet);
+    	for (Etat e : this.etats)
+    	{
+    		for (Etat pe : M.etats)
+    		{
+    			prodM.ajouterEtat(e.getIdEtat() + pe.getIdEtat(), getTypeIntersect(e,pe));
+    		}
+    	}
+    	for (Etat etat : this.etats)
+    	{
+    		for (Etat petat : M.etats)
+    		{			 
+    			etat.getTransitionSortants().forEach((character, etatSortants) -> {
+    				for (Etat petatSortants : petat.getTransitionSortants().get(character))
+    					prodM.ajouterTransition(etat.getIdEtat() + petat.getIdEtat(), character, 
+    							prodM.findEtat(etatSortants.get(0).getIdEtat() + petatSortants.getIdEtat()).getIdEtat());
+    			});
+    		}
+    		
+    	}
+    	return prodM;
+    }
+    
+    private TypeEtat getTypeUnion(Etat e1, Etat e2) {
     	
     	if (e1.isInital() && e2.isInital())
     	{
     		if(e1.getType()==TypeEtat.INIT && e2.getType()==TypeEtat.INIT)
     			return TypeEtat.INIT;
     		if(e1.getType()==TypeEtat.INIT_FINAL && e2.getType()==TypeEtat.INIT_FINAL)
-    			return TypeEtat.INIT_FINAL_UNION_INTERSECT;		 
+    			return TypeEtat.INIT_FINAL;		 
     		return TypeEtat.INIT_FINAL; 
     	}
     	if (e1.isFinal() || e2.isFinal())
     	{
     		if(e1.getType()==TypeEtat.FINAL && e2.getType()==TypeEtat.FINAL)
-    			return TypeEtat.FINAL_UNION_INTERSECT;
+    			return TypeEtat.FINAL;
     		return TypeEtat.FINAL;
+    	} 
+    	return TypeEtat.MID;
+    }
+    
+private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
+    	
+    	if (e1.isInital() && e2.isInital())
+    	{
+    		if(e1.getType()==TypeEtat.INIT && e2.getType()==TypeEtat.INIT)
+    			return TypeEtat.INIT;
+    		if(e1.getType()==TypeEtat.INIT_FINAL && e2.getType()==TypeEtat.INIT_FINAL)
+    			return TypeEtat.INIT_FINAL;		 
+    		return TypeEtat.INIT_FINAL; 
+    	}
+    	if (e1.isFinal() || e2.isFinal())
+    	{
+    		if(e1.getType()==TypeEtat.FINAL && e2.getType()==TypeEtat.FINAL)
+    			return TypeEtat.FINAL;
     	} 
     	return TypeEtat.MID;
     }

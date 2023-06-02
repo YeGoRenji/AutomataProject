@@ -27,7 +27,12 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                            <children>
-                              <Button fx:id="productId" prefWidth="120.0" text="Automate Produit"/>
+                              <Button fx:id="unionId" prefWidth="120.0" text="Réunion"/>
+                           </children>
+                        </HBox>
+                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <Button fx:id="intersectId" prefWidth="120.0" text="Intersection"/>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
