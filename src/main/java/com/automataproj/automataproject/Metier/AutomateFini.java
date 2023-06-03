@@ -17,6 +17,8 @@ import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.model.Factory.*;
 
 public abstract class AutomateFini {
+
+    public static final char EPSILON = '\0';
     protected String idAutomate;
 
     protected List<Character> alphabet;
@@ -35,6 +37,11 @@ public abstract class AutomateFini {
         etatsInit = new ArrayList<>();
         etatsFinal = new ArrayList<>();
         alphabet = new ArrayList<>();
+    }
+
+
+    public List<Etat> getEtatsInit(){
+        return etatsInit;
     }
 
     public void setAlphabet(List<Character> alphabet) {
@@ -76,11 +83,21 @@ public abstract class AutomateFini {
 
         for (Etat etat : etats)
         {
-            Shape sh = etat.isFinal() ? Shape.DOUBLE_CIRCLE : Shape.CIRCLE;
+            Shape sh ;
 
             if (etat.isInital())
                 g.add(node("").with(Shape.NONE).link(node(etat.getIdEtat())));
-            g.add(node(etat.getIdEtat()).with(sh));
+            if (etat.isFinal())
+            {
+            	sh = Shape.DOUBLE_CIRCLE;
+            	g.add(node(etat.getIdEtat()).with(sh));
+            }
+            else 
+            {
+            	sh = Shape.CIRCLE;
+            	g.add(node(etat.getIdEtat()).with(sh));
+            }
+            
 
             etat.getTransitionSortants().forEach((character, etatSortants) -> {
                 for (Etat etatSort : etatSortants)
@@ -140,4 +157,14 @@ public abstract class AutomateFini {
     }
     public abstract String ajouterEtat(String idEtat, TypeEtat type);
     public abstract String ajouterTransition(String idEtatDepart, Character c, String idEtatArrive);
+
+    public Etat getEtatParId(String IdEtat) {
+        for (Etat etat : this.etats) {
+            if (etat.getIdEtat().equals(IdEtat)) {
+                return etat;
+            }
+        }
+        // Si l'état n'a pas été trouvé, renvoyer null ou lever une exception
+        return null;
+    }
 }

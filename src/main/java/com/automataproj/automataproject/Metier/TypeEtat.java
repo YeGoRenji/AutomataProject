@@ -4,5 +4,5 @@ public enum TypeEtat {
     INIT,
     MID,
     FINAL,
-    INIT_FINAL
+    INIT_FINAL,
 }

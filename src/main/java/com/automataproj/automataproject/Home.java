@@ -18,6 +18,7 @@ public class Home extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         af.setIdAutomate("Automate 1");
         fxmlLoader.<HomeController>getController().fillVbox(List.of(af));
+        stage.setTitle("Théorie de la calculabilité");
 //        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("newAutomataPopup.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 750, 400);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());

@@ -13,6 +13,7 @@ public class PopupAutomataCreation {
         Stage window = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("newAutomataPopup.fxml"));
 
+        window.setTitle("New Automata");
         window.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(fxmlLoader.load(), 750, 400);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());

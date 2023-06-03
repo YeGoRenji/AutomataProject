@@ -81,7 +81,7 @@ public class Etat {
         return transitionSortants;
     }
 
-    public boolean isFinal()
+	public boolean isFinal()
     {
         return (type == TypeEtat.FINAL || type == TypeEtat.INIT_FINAL);
     }
@@ -89,4 +89,5 @@ public class Etat {
     public boolean isInital() {
         return  (type == TypeEtat.INIT || type == TypeEtat.INIT_FINAL);
     }
+    
 }

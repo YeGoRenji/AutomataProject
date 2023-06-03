@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+
 public class AFD extends AutomateFini {
 
     public AFD()
     {
 
     }
-    
- 
-    
+
     public static List<Etat> delta(Character c, Etat q)
     {
         return q.getNextState(c);
@@ -77,11 +76,9 @@ public class AFD extends AutomateFini {
                 return false;
             }
         }
-
         return (deltaStar(mot, etatsInit.get(0)).isFinal());
     }
-    
-    
+
     public AFD minimiser()
     {
     	AFD af = new AFD();
@@ -179,10 +176,7 @@ public class AFD extends AutomateFini {
     		}
     		i++;
     	}
-    	
-    	
-        
-    	
+
     	return af;
     }
 
@@ -197,10 +191,199 @@ public class AFD extends AutomateFini {
         return null;
     }
     
-   
+
+    public AFD unionAutomata(AFD M) {
+    	AFD prodM = new AFD();
+    	prodM.setAlphabet(alphabet);
+    	for (Etat e : this.etats)
+    	{
+    		for (Etat pe : M.etats)
+    		{
+    			prodM.ajouterEtat(e.getIdEtat() + pe.getIdEtat(), getTypeUnion(e,pe));
+    		}
+    	}
+    	for (Etat etat : this.etats)
+    	{
+    		for (Etat petat : M.etats)
+    		{			 
+    			etat.getTransitionSortants().forEach((character, etatSortants) -> {
+    				for (Etat petatSortants : petat.getTransitionSortants().get(character))
+    					prodM.ajouterTransition(etat.getIdEtat() + petat.getIdEtat(), character, 
+    							prodM.findEtat(etatSortants.get(0).getIdEtat() + petatSortants.getIdEtat()).getIdEtat());
+    			});
+    		}
+    		
+    	}
+    	return prodM;
+    }
     
+    public AFD intersectAutomata(AFD M) {
+    	AFD prodM = new AFD();
+    	prodM.setAlphabet(alphabet);
+    	for (Etat e : this.etats)
+    	{
+    		for (Etat pe : M.etats)
+    		{
+    			prodM.ajouterEtat(e.getIdEtat() + pe.getIdEtat(), getTypeIntersect(e,pe));
+    		}
+    	}
+    	for (Etat etat : this.etats)
+    	{
+    		for (Etat petat : M.etats)
+    		{			 
+    			etat.getTransitionSortants().forEach((character, etatSortants) -> {
+    				for (Etat petatSortants : petat.getTransitionSortants().get(character))
+    					prodM.ajouterTransition(etat.getIdEtat() + petat.getIdEtat(), character, 
+    							prodM.findEtat(etatSortants.get(0).getIdEtat() + petatSortants.getIdEtat()).getIdEtat());
+    			});
+    		}
+    		
+    	}
+    	return prodM;
+    }
+    
+    private TypeEtat getTypeUnion(Etat e1, Etat e2) {
+    	
+    	if (e1.isInital() && e2.isInital())
+    	{
+    		if(e1.getType()==TypeEtat.INIT && e2.getType()==TypeEtat.INIT)
+    			return TypeEtat.INIT;
+    		if(e1.getType()==TypeEtat.INIT_FINAL && e2.getType()==TypeEtat.INIT_FINAL)
+    			return TypeEtat.INIT_FINAL;		 
+    		return TypeEtat.INIT_FINAL; 
+    	}
+    	if (e1.isFinal() || e2.isFinal())
+    	{
+    		if(e1.getType()==TypeEtat.FINAL && e2.getType()==TypeEtat.FINAL)
+    			return TypeEtat.FINAL;
+    		return TypeEtat.FINAL;
+    	} 
+    	return TypeEtat.MID;
+    }
+    
+	private TypeEtat getTypeIntersect(Etat e1, Etat e2) {
+    	
+    	if (e1.isInital() && e2.isInital())
+    	{
+    		if(e1.getType()==TypeEtat.INIT && e2.getType()==TypeEtat.INIT)
+    			return TypeEtat.INIT;
+    		if(e1.getType()==TypeEtat.INIT_FINAL && e2.getType()==TypeEtat.INIT_FINAL)
+    			return TypeEtat.INIT_FINAL;		 
+    		return TypeEtat.INIT_FINAL; 
+    	}
+    	if (e1.isFinal() || e2.isFinal())
+    	{
+    		if(e1.getType()==TypeEtat.FINAL && e2.getType()==TypeEtat.FINAL)
+    			return TypeEtat.FINAL;
+    	} 
+    	return TypeEtat.MID;
+    }
+    
+    public AFD ComplementAFD() {   	
+    	AFD complementM = new AFD();
+    	complementM.setAlphabet(alphabet);
+    	for (Etat e : this.etats)
+    	{
+    		complementM.ajouterEtat(e.getIdEtat(),getTypeComplement(e));
+    	}
+    	for (Etat e : this.etats)
+    	{
+    		e.getTransitionSortants().forEach((character, etatSortants) -> {
+    			complementM.ajouterTransition(e.getIdEtat(), character, 
+    					complementM.findEtat(etatSortants.get(0).getIdEtat()).getIdEtat());
+    		});   
+    	}
+    	return complementM;
+    }
+ 
+	 private TypeEtat getTypeComplement(Etat etat) {
+		 
+		if(!etat.isFinal())
+		{
+			if(etat.getType()==TypeEtat.INIT)
+				return TypeEtat.INIT_FINAL;
+			return TypeEtat.FINAL;
+		}
+		else
+		{
+			if(etat.getType()==TypeEtat.INIT_FINAL)
+				return TypeEtat.INIT;
+			return TypeEtat.MID;
+		}
+	 }
+	  
+	 public AFND imageMirror() {
+		 AFND primeM = new AFND();
+		 primeM.setAlphabet(alphabet);
+		 for (Etat e : this.etats) {
+			 primeM.ajouterEtat(e.getIdEtat(), getTypeMirror(e));
+		 }
+		 for (Etat e : this.etats)
+	    	{
+	    		e.getTransitionSortants().forEach((character, etatSortants) -> {
+	    			primeM.ajouterTransition(primeM.findEtat(etatSortants.get(0).getIdEtat()).getIdEtat(), character, 
+	    					e.getIdEtat());
+	    		});   
+	    	}
+		 return primeM;
+	 }
+	 
+	 private TypeEtat getTypeMirror(Etat e) {
+		 if(e.isInital()) {
+			 if(e.getType()==TypeEtat.INIT_FINAL)
+				 return TypeEtat.INIT_FINAL;
+			 return TypeEtat.FINAL;
+		 }
+		 if(e.isFinal()) {
+			 return TypeEtat.INIT;
+		 }
+		 return TypeEtat.MID;
+	 }
    
 
+    /*public int compterMotsAcceptes(AFD afd, int limite, Etat etatInitial) {
+        int compteur = 0;
+        Stack<Etat> etatsCourants = new Stack<>();
+        etatsCourants.push(etatInitial);
+        while (!etatsCourants.empty()) {
+            Etat etatCourant = etatsCourants.pop();
+            if (etatCourant.isFinal()) {
+                compteur++;
+            }
+            if (limite > 0) {
+                for (char symbole : afd.getAlphabet()) {
+                    Etat etatSuivant = etatCourant.getNextState(symbole).get(0);
+                        etatsCourants.push(etatSuivant);
+                }
+            }
+                limite--;
+        }
+        return compteur;
+    }
+    */
+
+    public List<String> generateAcceptedWords(AFD afd, int maxLength) {
+        List<String> acceptedWords = new ArrayList<>();
+        generateAcceptedWordsHelper(afd, afd.getEtatsInit().get(0), "", maxLength, acceptedWords);
+        return acceptedWords;
+    }
+
+    private void generateAcceptedWordsHelper(AFD afd, Etat currentState, String currentWord, int maxLength, List<String> acceptedWords) {
+        if (reconnaissanceMot(currentWord) && currentWord.length() <= maxLength) {
+            acceptedWords.add(currentWord);
+        }
+        if (currentWord.length() < maxLength) {
+            /*for (char c : afd.getAlphabet()) {
+                Etat nextState = currentState.getNextState(c).get(0);
+                generateAcceptedWordsHelper(afd, nextState, currentWord + c, maxLength, acceptedWords);}
+                */
+            currentState.getTransitionSortants().forEach((c, etatsSortants) -> {
+                generateAcceptedWordsHelper(afd, etatsSortants.get(0) , currentWord + c, maxLength , acceptedWords);
+            });
+
+        }
 
 
+
+    }
 }

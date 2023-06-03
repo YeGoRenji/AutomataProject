@@ -13,6 +13,8 @@ public class PopupTransitionCreation {
     public static PopupTransitionReturn display(AutomateFini af) throws IOException {
         Stage window = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("newTransitionPopup.fxml"));
+
+        window.setTitle("New Transition");
         window.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(fxmlLoader.load(), 750, 400);
         fxmlLoader.<PopupTransitionController>getController().setAf(af);

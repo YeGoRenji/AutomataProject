@@ -14,6 +14,7 @@ public class PopupStateCreation {
         Stage window = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("newStatePopup.fxml"));
 
+        window.setTitle("New State");
         window.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(fxmlLoader.load(), 750, 400);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());

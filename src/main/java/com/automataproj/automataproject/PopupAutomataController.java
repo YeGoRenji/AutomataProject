@@ -52,7 +52,8 @@ public class PopupAutomataController implements Initializable {
         List<String> arrAlpha = List.of(alphabetsText.split(" "));
         returnObj.alphabets = new ArrayList<>();
         for (String alphaStr : arrAlpha)
-            returnObj.alphabets.add(alphaStr.charAt(0));
+            if (!returnObj.alphabets.contains(alphaStr.charAt(0)))
+                returnObj.alphabets.add(alphaStr.charAt(0));
         //
         returnObj.automataName = automateNameText;
         returnObj.isAFND = afndButton.isSelected();
