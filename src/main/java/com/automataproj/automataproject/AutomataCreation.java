@@ -74,7 +74,7 @@ public class AutomataCreation implements Initializable {
             return;
         }
         Stage stageComplement = new Stage();
-        AFD afdConverted = (af instanceof AFD) ? (AFD)af : ((AFND) af).determiniser_2();
+        AFD afdConverted = (af instanceof AFD) ? (AFD) af : ((AFND) af).determiniser_2();
         new ShowResultAutomaton(afdConverted.ComplementAFD(), stageComplement, "Complémentaire");
     }
 

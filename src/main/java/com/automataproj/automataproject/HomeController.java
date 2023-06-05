@@ -100,6 +100,8 @@ public class    HomeController implements Initializable {
     }
 
     public void onIntersectAutomata(ActionEvent actionEvent) {
+    	 Stage stageProduct = new Stage();
 
+//       new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
     }
 }

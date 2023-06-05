@@ -82,8 +82,8 @@ public class showAutomataProduct {
 			{
 				if(operation.equals("union"))
 					new ShowResultAutomaton(M.unionAutomata(primeM), stage, "Réunion");
-				else
-					new ShowResultAutomaton(M.unionAutomata(primeM), stage, "Intersection");
+				if(operation.equals("intersect"))
+					new ShowResultAutomaton(M.intersectAutomata(primeM), stage, "Intersection");
 			}
 	         else
 	     	{
