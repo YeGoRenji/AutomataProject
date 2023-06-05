@@ -1,7 +1,17 @@
+@font-face {
+    font-family: 'JetBrains';
+    src: url('JetBrainsMono-Regular.ttf');
+}
+
 .font-medium {
     -fx-font-size: 12pt;
+    -fx-font-family: 'JetBrains';
+}
+
+.root {
+    -fx-font-family: "JetBrains";
 }
 
 * {
-    -fx-font-family: "Roboto Light";
+    -fx-font-family: "JetBrains";
 }

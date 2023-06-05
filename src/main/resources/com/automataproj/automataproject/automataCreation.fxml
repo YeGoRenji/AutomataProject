@@ -31,6 +31,10 @@
                     <Button onAction="#onClickMirror" fx:id="mirrorId" prefWidth="120.0"
                             text="Image Miroir"/>
                 </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickSave" fx:id="saveId" prefWidth="120.0"
+                            text="Sauvegarder"/>
+                </HBox>
             </ToolBar>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

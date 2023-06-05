@@ -7,6 +7,7 @@ import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.engine.Renderer;
 import guru.nidi.graphviz.model.MutableGraph;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -166,5 +167,15 @@ public abstract class AutomateFini {
         }
         // Si l'état n'a pas été trouvé, renvoyer null ou lever une exception
         return null;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        String type = (this instanceof AFD) ? type = "AFD" : "AFND";
+        str += getIdAutomate() + "    (" + type + ")\n";
+        str += "#Etats : " + getEtats().size() + " / Alphabets : " + getAlphabet();
+        return str;
     }
 }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.HomeController">
-    <ListView fx:id="automateList" fixedCellSize="100.0" layoutX="214.0" layoutY="48.0" prefHeight="474.0" prefWidth="850.0" style="-fx-background-color: #eaeaea;" />
+    <ListView fx:id="automateList" fixedCellSize="100.0" layoutX="214.0" layoutY="48.0" prefHeight="474.0" prefWidth="850.0" style="-fx-background-color: #eaeaea;" styleClass="font-medium" />
    <HBox alignment="CENTER" layoutX="341.0" layoutY="596.0" prefHeight="80.0" prefWidth="597.0" spacing="30.0">
-         <Button mnemonicParsing="false" onAction="#onNewAutomata" text="Nouveau Automate" />
+       <Button mnemonicParsing="false" onAction="#onNewAutomata" text="Nouveau Automate" />
+       <Button mnemonicParsing="false" onAction="#onModifyAutomata" prefHeight="26.0" prefWidth="128.0" text="Modifier Automate" />
    </HBox>
     <stylesheets>
-        <URL value="@fontMedium.css"/>
+        <URL value="@fontMedium.css" />
     </stylesheets>
 </AnchorPane>

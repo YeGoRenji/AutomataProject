@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.automataproj.automataproject.Metier.AFD;
 
+import com.automataproj.automataproject.Metier.AutomateFini;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 
 public class ShowResultAutomaton {
 	
-public ShowResultAutomaton(AFD M, Stage stage, String title) {
+public ShowResultAutomaton(AutomateFini M, Stage stage, String title) {
 	    
     	VBox root = new VBox();
     	root.setStyle("-fx-background-color: white;");
@@ -39,12 +40,15 @@ public ShowResultAutomaton(AFD M, Stage stage, String title) {
          TextField mot = new TextField();
          Button reconnaissanceBtn = new Button("Reconnaissance");
          Label output = new Label();
-         reconnaissanceBtn.setOnAction(event -> {
-        	 if(M.reconnaissanceMot(mot.getText()))
-        		 output.setText("True");
-        	 else
-        		 output.setText("False");
-         });
+		 if (M instanceof AFD)
+			 reconnaissanceBtn.setOnAction(event -> {
+				 if(((AFD) M).reconnaissanceMot(mot.getText()))
+					 output.setText("True");
+				 else
+					 output.setText("False");
+			 });
+		 else
+			 reconnaissanceBtn.setDisable(true);
          reconnaissance.getChildren().addAll(mot,reconnaissanceBtn, output);
          reconnaissance.setSpacing(20);
          reconnaissance.setPadding(new Insets(50));;
