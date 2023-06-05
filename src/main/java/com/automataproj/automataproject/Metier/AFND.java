@@ -49,12 +49,6 @@ public class AFND extends AutomateFini {
         collectionsList.add(etatInit);
         nomVersCollection.put(getCollectionName(etatInit), etatInit);
 
-//        Queue<Pair<String, Set<Etat>>> collectionQueue = new LinkedList<>();
-//        collectionQueue.add(new Pair<>(getCollectionName(etatInit), etatInit));
-//
-//        collectionQueue.
-
-
         boolean isNewRow;
         while (true)
         {

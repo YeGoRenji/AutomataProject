@@ -17,22 +17,26 @@
                         <Insets/>
                     </opaqueInsets>
                     <Button onAction="#onClickState" mnemonicParsing="false" prefWidth="120.0"
-                            text="State"/>
+                            text="État"/>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                     <Button onAction="#onClickTransition" mnemonicParsing="false" prefWidth="120.0"
                             text="Transition"/>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onDeterminerClick" prefWidth="120.0"
+                    <Button onAction="#onDeterminerClick" fx:id="determinerId" prefWidth="120.0"
                             text="Déterminer"/>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onClickComplement" fx:id="complementId" prefWidth="120.0"
+                    <Button onAction="#onMinimiserClick" fx:id="minimiseId" prefWidth="120.0"
+                            text="Minimiser"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickComplement" prefWidth="120.0"
                             text="Complémentaire"/>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onClickMirror" fx:id="mirrorId" prefWidth="120.0"
+                    <Button onAction="#onClickMirror" prefWidth="120.0"
                             text="Image Miroir"/>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
