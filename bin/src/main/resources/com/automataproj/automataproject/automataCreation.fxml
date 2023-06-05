@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.AutomataCreation">
+    <SplitPane dividerPositions="0.1724598930481283" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane maxWidth="100.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0"
+                    style="-fx-background-color: #EEEEEE;">
+            <ToolBar orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <Button onAction="#onClickState" mnemonicParsing="false" prefWidth="120.0"
+                            text="State"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickTransition" mnemonicParsing="false" prefWidth="120.0"
+                            text="Transition"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onDeterminerClick" prefWidth="120.0"
+                            text="Déterminer"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickComplement" fx:id="complementId" prefWidth="120.0"
+                            text="Complémentaire"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickMirror" fx:id="mirrorId" prefWidth="120.0"
+                            text="Image Miroir"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickSave" fx:id="saveId" prefWidth="120.0"
+                            text="Sauvegarder"/>
+                </HBox>
+            </ToolBar>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <Pane fx:id="mainPane" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        </AnchorPane>
+    </SplitPane>
+</AnchorPane>

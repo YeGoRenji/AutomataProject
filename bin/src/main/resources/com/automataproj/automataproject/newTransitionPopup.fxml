@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.GridPane.*?>
+<?import org.kordamp.bootstrapfx.scene.layout.Panel?>
+<?import java.net.URL?>
+
+<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.Popups.PopupTransitionController">
+   <Panel prefWidth="750.0" prefHeight="400.0" styleClass="panel-primary">
+      <heading>
+         <Label styleClass="h3" text="Nouvelle transition :" >
+            <font>
+               <Font name="Roboto Light" size="20.0" />
+            </font>
+         </Label>
+      </heading>
+      <body>
+         <GridPane vgap="30">
+            <HBox spacing="10" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="1">
+               <ComboBox HBox.hgrow="ALWAYS" fx:id="startStateCb"/>
+               <ComboBox HBox.hgrow="ALWAYS" fx:id="symbolCb"/>
+               <ComboBox HBox.hgrow="ALWAYS" fx:id="destStateCb"/>
+            </HBox>
+            <HBox spacing="5" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="2">
+               <Button onAction="#onClickAjouter" styleClass="btn, btn-success" text="Ajouter"/>
+               <Button onAction="#onClickCancel" fx:id="cancelBtn" styleClass="btn, btn-default" text="Cancel"/>
+            </HBox>
+         </GridPane>
+      </body>
+      <padding>
+         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      </padding>
+   </Panel>
+   <stylesheets>
+      <URL value="@fontMedium.css"/>
+   </stylesheets>
+</AnchorPane>
