@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.GridPane.*?>
 <?import org.kordamp.bootstrapfx.scene.layout.Panel?>
 <?import java.net.URL?>
-<?import com.automataproj.automataproject.Components.*?>
+<?import com.automataproj.automataproject.Comps.*?>
 
-<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.PopupAutomataController">
+<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.Popups.PopupAutomataController">
    <Panel prefWidth="750.0" prefHeight="400.0" styleClass="panel-primary">
       <heading>
          <Label styleClass="h3" text="Nouveau Automate :" >

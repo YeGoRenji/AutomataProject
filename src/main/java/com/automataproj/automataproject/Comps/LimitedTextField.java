@@ -1,4 +1,4 @@
-package com.automataproj.automataproject.Components;
+package com.automataproj.automataproject.Comps;
 import java.util.Objects;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

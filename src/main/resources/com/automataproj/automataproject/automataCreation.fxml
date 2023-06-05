@@ -24,6 +24,10 @@
                             text="Transition"/>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onDeterminerClick" prefWidth="120.0"
+                            text="Déterminer"/>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                     <Button onAction="#onClickComplement" fx:id="complementId" prefWidth="120.0"
                             text="Complémentaire"/>
                 </HBox>

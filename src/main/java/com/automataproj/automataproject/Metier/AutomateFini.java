@@ -173,9 +173,10 @@ public abstract class AutomateFini {
     public String toString() {
         String str = "";
 
-        String type = (this instanceof AFD) ? type = "AFD" : "AFND";
+        String type = (this instanceof AFD) ? "AFD" : "AFND";
         str += getIdAutomate() + "    (" + type + ")\n";
-        str += "#Etats : " + getEtats().size() + " / Alphabets : " + getAlphabet();
+        str += "#Etats : " + getEtats().size() + "\n";
+        str += "Alphabets : " + getAlphabet();
         return str;
     }
 }

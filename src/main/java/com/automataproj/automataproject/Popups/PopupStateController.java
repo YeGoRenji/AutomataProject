@@ -1,5 +1,5 @@
-package com.automataproj.automataproject;
-import com.automataproj.automataproject.Components.LimitedTextField;
+package com.automataproj.automataproject.Popups;
+import com.automataproj.automataproject.Comps.LimitedTextField;
 import com.automataproj.automataproject.Metier.TypeEtat;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

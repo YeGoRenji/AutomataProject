@@ -1,4 +1,4 @@
-package com.automataproj.automataproject;
+package com.automataproj.automataproject.Popups;
 
 import java.util.List;
 

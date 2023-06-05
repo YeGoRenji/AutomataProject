@@ -4,7 +4,7 @@ import com.automataproj.automataproject.Metier.AFD;
 import com.automataproj.automataproject.Metier.AFND;
 import com.automataproj.automataproject.Metier.AutomateFini;
 import com.automataproj.automataproject.Metier.TypeEtat;
-import guru.nidi.graphviz.engine.Graphviz;
+import com.automataproj.automataproject.Popups.*;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -74,8 +74,10 @@ public class AutomataCreation implements Initializable {
             return;
         }
         Stage stageComplement = new Stage();
-        new ShowResultAutomaton(((AFD) af).ComplementAFD(), stageComplement, "Complémentaire");
+        AFD afdConverted = (af instanceof AFD) ? (AFD)af : ((AFND) af).determiniser_2();
+        new ShowResultAutomaton(afdConverted.ComplementAFD(), stageComplement, "Complémentaire");
     }
+
 
     @FXML
     public void onClickMirror(ActionEvent event) throws IOException {
@@ -85,7 +87,8 @@ public class AutomataCreation implements Initializable {
             return;
         }
         Stage stageMirror = new Stage();
-        AFD imgDeterminisation = ((AFD) af).imageMirror().determiniser();
+        AFD afdConverted = (af instanceof AFD) ? (AFD)af : ((AFND) af).determiniser_2();
+        AFD imgDeterminisation = afdConverted.imageMirror().determiniser_2();
         new ShowResultAutomaton(imgDeterminisation, stageMirror, "Image miroir");
     }
 
@@ -121,21 +124,16 @@ public class AutomataCreation implements Initializable {
         af.setAlphabet(returnObj.alphabets);
         af.setIdAutomate(returnObj.automataName);
         Platform.runLater(() -> ((Stage) mainPane.getScene().getWindow()).setTitle("Creating Automate : " + returnObj.automataName + " " + (returnObj.isAFND ? "(AFND)" : "(AFD)")));
-        // TODO: REMOVE THIS WHEN DETERMINISATION IS DONE !
-        if (returnObj.isAFND)
-        {
-            complementId.setDisable(true);
-            mirrorId.setDisable(true);
-        }
-        // ! TODO: REMOVE THIS
-//        if (!returnObj.isAFND)
+        // C'est un Exemple Manuelle
+//        if (returnObj.isAFND)
 //        {
 //            af.setAlphabet(List.of('a','b'));
 //            af.ajouterEtat("0", TypeEtat.INIT);
-//            af.ajouterEtat("1",TypeEtat.MID);
+//            af.ajouterEtat("1", TypeEtat.MID);
 //            af.ajouterEtat("2", TypeEtat.FINAL);
 //            af.ajouterTransition("0",'b',"0");
 //            af.ajouterTransition("0",'a',"1");
+//            af.ajouterTransition("0",'a',"0");
 //            af.ajouterTransition("1",'b',"2");
 //            af.ajouterTransition("2",'a',"2");
 //            af.ajouterTransition("2",'b',"2");
@@ -156,4 +154,8 @@ public class AutomataCreation implements Initializable {
         mainPane.getChildren().add(imgview);
     }
 
+    public void onDeterminerClick(ActionEvent actionEvent) {
+        AFD afd = ((AFND) af).determiniser_2();
+        new ShowResultAutomaton(afd, new Stage(), afd.getIdAutomate());
+    }
 }

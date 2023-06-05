@@ -1,6 +1,6 @@
-package com.automataproj.automataproject;
+package com.automataproj.automataproject.Popups;
 
-import guru.nidi.graphviz.attribute.Label;
+import com.automataproj.automataproject.Home;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;

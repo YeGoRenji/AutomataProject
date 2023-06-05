@@ -1,4 +1,6 @@
 package com.automataproj.automataproject.Metier;
+import javafx.util.Pair;
+
 import java.util.*;
 
 public class AFND extends AutomateFini {
@@ -34,61 +36,121 @@ public class AFND extends AutomateFini {
         return etatDep.addTransition(c, etatArr);
     }
 
+    public AFD determiniser_2()
+    {
+        AFD afdResult = new AFD();
+        afdResult.setAlphabet(this.alphabet);
+        afdResult.setIdAutomate("Resultat Determinisation de " + this.getIdAutomate());
+        HashMap<String, Set<Etat>> nomVersCollection = new HashMap<>();
+        List<Set<Etat>> collectionsList = new ArrayList<>();
+        Set<Etat> etatInit = new HashSet<>(getEtatsInit());
 
-    public AFD determiniser() {
+        afdResult.ajouterEtat(getCollectionName(etatInit), getTypeCollection(etatInit, TypeEtat.INIT));
+        collectionsList.add(etatInit);
+        nomVersCollection.put(getCollectionName(etatInit), etatInit);
 
-        List<Etat> etatsInitiauxList = this.getEtatsInit();
-        List<Etat> etatsInitiaux = new ArrayList<>(etatsInitiauxList);
-
-
-
-        System.out.println(getCollectionName(etatsInitiaux));
-
-
-        AFD afd = new AFD();
-        afd.setAlphabet(this.getAlphabet());
-
-
-        HashMap<String , Set<Etat>> idCollection= new HashMap<>();
-        Set<Etat> EtatsCollection;
-        Set<Etat> nextstates;
-        afd.ajouterEtat(getCollectionName(etatsInitiaux), getTypeCollection(etatsInitiaux,TypeEtat.INIT));
-        idCollection.put(getCollectionName(etatsInitiaux), new HashSet<>(etatsInitiaux));
+//        Queue<Pair<String, Set<Etat>>> collectionQueue = new LinkedList<>();
+//        collectionQueue.add(new Pair<>(getCollectionName(etatInit), etatInit));
+//
+//        collectionQueue.
 
 
-        for (Etat etatCourant : this.getEtats()) {
-
-            etatCourant.getTransitionSortants().forEach((symbole, etatsAccessibles) ->{
-
-
-                Etat nouvelEtat = afd.getEtatParId(getCollectionName(etatsAccessibles));
-                if (nouvelEtat == null) {
-
-                    nouvelEtat = new Etat();
-                    nouvelEtat.setIdEtat(getCollectionName(etatsAccessibles));
-                    afd.ajouterEtat(nouvelEtat.getIdEtat(), getTypeCollection(etatsAccessibles,TypeEtat.MID));
-                    idCollection.put(nouvelEtat.getIdEtat(), new HashSet<>(etatsAccessibles));
-                }
-            });
-
-        }
-        for (Etat etatCourant : afd.getEtats())
+        boolean isNewRow;
+        while (true)
         {
-            EtatsCollection = idCollection.get(etatCourant.getIdEtat());
+            isNewRow = false;
 
-            for(Character symbol : afd.getAlphabet()){
-                nextstates=new HashSet<>();
-                for(Etat etatCollectionCourant : EtatsCollection){
-                    if (etatCollectionCourant.getNextState(symbol)!=null)
-                        nextstates.addAll(etatCollectionCourant.getNextState(symbol));
+            List<String> currentRows = new ArrayList<>();
+
+            for (Map.Entry<String, Set<Etat>> set: nomVersCollection.entrySet()) {
+                String idEtat = set.getKey();
+                Set<Etat> etatsCollection = set.getValue();
+                currentRows.add(idEtat);
+
+                for (Character c : afdResult.getAlphabet()) {
+                    Set<Etat> nouvelleCollection = new HashSet<>();
+                    for (Etat etat : etatsCollection) {
+                        List<Etat> nextList = etat.getNextState(c);
+                        if (nextList != null)
+                            nouvelleCollection.addAll(nextList);
+                    }
+                    if (nouvelleCollection.size() == 0)
+                        break;
+                    String idNew = getCollectionName(nouvelleCollection);
+                    if (!collectionsList.contains(nouvelleCollection)) {
+                        nomVersCollection.put(idNew, nouvelleCollection);
+                        afdResult.ajouterEtat(idNew, getTypeCollection(nouvelleCollection, TypeEtat.MID));
+                        collectionsList.add(nouvelleCollection);
+                        isNewRow = true;
+                    }
+//                    if (nouvelleCollection.get)
+                    afdResult.ajouterTransition(idEtat, c, idNew);
                 }
-                afd.ajouterTransition(etatCourant.getIdEtat(), symbol, HashmapReverse(nextstates,idCollection));
-
             }
+            for (String idEtat: currentRows) {
+                nomVersCollection.remove(idEtat);
+            }
+            if (!isNewRow)
+                break;
         }
 
-            return afd;
+        return afdResult;
     }
+
+//    public AFD determiniser() {
+//
+//        List<Etat> etatsInitiauxList = this.getEtatsInit();
+//        List<Etat> etatsInitiaux = new ArrayList<>(etatsInitiauxList);
+//
+//
+//
+//        System.out.println(getCollectionName(etatsInitiaux));
+//
+//
+//        AFD afd = new AFD();
+//        afd.setAlphabet(this.getAlphabet());
+//
+//
+//        HashMap<String , Set<Etat>> idCollection= new HashMap<>();
+//        Set<Etat> EtatsCollection;
+//        Set<Etat> nextstates;
+//        afd.ajouterEtat(getCollectionName(etatsInitiaux), getTypeCollection(etatsInitiaux,TypeEtat.INIT));
+//        idCollection.put(getCollectionName(etatsInitiaux), new HashSet<>(etatsInitiaux));
+//
+//
+//        for (Etat etatCourant : this.getEtats()) {
+//
+//            etatCourant.getTransitionSortants().forEach((symbole, etatsAccessibles) ->{
+//
+//
+//                Etat nouvelEtat = afd.getEtatParId(getCollectionName(etatsAccessibles));
+//                if (nouvelEtat == null) {
+//
+//                    nouvelEtat = new Etat();
+//                    nouvelEtat.setIdEtat(getCollectionName(etatsAccessibles));
+//                    afd.ajouterEtat(nouvelEtat.getIdEtat(), getTypeCollection(etatsAccessibles,TypeEtat.MID));
+//                    idCollection.put(nouvelEtat.getIdEtat(), new HashSet<>(etatsAccessibles));
+//                }
+//            });
+//
+//        }
+//        for (Etat etatCourant : afd.getEtats())
+//        {
+//            EtatsCollection = idCollection.get(etatCourant.getIdEtat());
+//
+//            for(Character symbol : afd.getAlphabet()){
+//                nextstates=new HashSet<>();
+//                for(Etat etatCollectionCourant : EtatsCollection){
+//                    if (etatCollectionCourant.getNextState(symbol)!=null)
+//                        nextstates.addAll(etatCollectionCourant.getNextState(symbol));
+//                }
+//                afd.ajouterTransition(etatCourant.getIdEtat(), symbol, HashmapReverse(nextstates,idCollection));
+//
+//            }
+//        }
+//
+//            return afd;
+//    }
 
     // Cette méthode calcule l'epsilon-fermeture d'un état donné
     /*public Set<Etat> epsilonFermeture(Etat etat) {
@@ -102,7 +164,7 @@ public class AFND extends AutomateFini {
         return epsilonFermeture;
     }*/
 
-    public String getCollectionName(List<Etat> etats){
+    public String getCollectionName(Set<Etat> etats){
         String s = new String();
         s += "{";
         for (Etat etat:etats)
@@ -115,6 +177,7 @@ public class AFND extends AutomateFini {
         return s;
     }
 
+
     public String HashmapReverse(Set<Etat> valeur , HashMap<String, Set<Etat>> idCollection ){
 
         for (Map.Entry<String, Set<Etat>> entry : idCollection.entrySet())
@@ -126,7 +189,7 @@ public class AFND extends AutomateFini {
         return null;
     }
 
-    public TypeEtat getTypeCollection(List<Etat> etats, TypeEtat defaultType)
+    public TypeEtat getTypeCollection(Set<Etat> etats, TypeEtat defaultType)
     {
         boolean isFinal=false;
         for(Etat etat : etats)

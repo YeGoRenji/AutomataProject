@@ -1,4 +1,4 @@
-package com.automataproj.automataproject;
+package com.automataproj.automataproject.Popups;
 
 public class PopupTransitionReturn {
     public String startState;

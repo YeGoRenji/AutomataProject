@@ -68,7 +68,7 @@ public class HelloApplication {
 //        });
         
         if (af instanceof AFND)
-        	afDeterminisation = ((AFND) af).determiniser();
+        	afDeterminisation = ((AFND) af).determiniser_2();
         else
         	afDeterminisation = (AFD) af;
         
@@ -94,110 +94,11 @@ public class HelloApplication {
         Button mirrorBtn = (Button) scene.lookup("#mirrorId");
         mirrorBtn.setOnAction(event -> {
         	Stage stageMirror = new Stage();
-        	AFD imgDeterminisation = afDeterminisation.imageMirror().determiniser();
+        AFD imgDeterminisation = afDeterminisation.imageMirror().determiniser_2();
         	new ShowResultAutomaton(imgDeterminisation, stageMirror, "Image miroir");
         });
 
     }
     
-    
-    
 
-    public static void main(String[] args) throws IOException {
-
-//        af.ajouterEtat("s1", TypeEtat.INIT);
-//        af.ajouterEtat("s2", TypeEtat.FINAL);
-//        af.ajouterEtat("s3", TypeEtat.FINAL);
-//        af.setAlphabet(List.of('0', '1'));
-//        af.ajouterTransition("s1", '0', "s2");
-//        af.ajouterTransition("s2", '0', "s1");
-//        af.ajouterTransition("s1", '1', "s1");
-//        af.ajouterTransition("s2", '1', "s2");
-//        af.ajouterTransition("s3", '\0', "s3");
-
-//        af.ajouterEtat("1", TypeEtat.INIT);
-//        af.ajouterEtat("2", TypeEtat.MID);
-//        af.ajouterEtat("3", TypeEtat.FINAL);
-//        af.setAlphabet(List.of('a', 'b'));
-//        af.ajouterTransition("1", 'a', "2");
-//        af.ajouterTransition("2", 'b', "3");
-//        af.ajouterTransition("3", 'a', "3");
-//        af.ajouterTransition("3", 'b', "3");
-        
-        // Test Pour Automate produit
-        af.ajouterEtat("0", TypeEtat.INIT);
-        af.ajouterEtat("1", TypeEtat.FINAL);
-        af.setAlphabet(List.of('0', '1'));
-        af.ajouterTransition("0", '1', "1");
-        af.ajouterTransition("1", '1', "0");
-        af.ajouterTransition("0", '0', "0");
-        af.ajouterTransition("1", '0', "1");
-        
-        primeM.ajouterEtat("0", TypeEtat.INIT);
-        primeM.ajouterEtat("1", TypeEtat.FINAL);
-        primeM.setAlphabet(List.of('0', '1'));
-        primeM.ajouterTransition("0", '0', "1");
-        primeM.ajouterTransition("1", '1', "0");
-        primeM.ajouterTransition("0", '1', "0");
-        primeM.ajouterTransition("1", '0', "1");
-        
-        // Test Image Miroir
-        afd.setAlphabet(List.of('a','b'));
-        afd.ajouterEtat("0", TypeEtat.INIT);
-        afd.ajouterEtat("1",TypeEtat.MID);
-        afd.ajouterEtat("2", TypeEtat.FINAL);
-        afd.ajouterTransition("0",'b',"0");
-        afd.ajouterTransition("0",'a',"1");
-        afd.ajouterTransition("1",'b',"2");
-        afd.ajouterTransition("2",'a',"2");
-        afd.ajouterTransition("2",'b',"2");
-
-//        af.ajouterEtat("s1", TypeEtat.FINAL);
-//        af.ajouterEtat("s2", TypeEtat.INIT);
-//        af.setAlphabet(List.of('0', '1'));
-//        af.ajouterTransition("s1", '0', "s2");
-//        af.ajouterTransition("s2", '0', "s1");
-//        af.ajouterTransition("s1", '1', "s1");
-//        af.ajouterTransition("s2", '1', "s2");
-//        af.printAutomate("automatePNG/test3.png");
-
-//       af.ajouterEtat("1", TypeEtat.INIT_FINAL);
-//       af.ajouterEtat("2", TypeEtat.FINAL);
-//       af.ajouterEtat("3", TypeEtat.INIT);
-//       af.setAlphabet(List.of('a', 'b'));
-//       af.ajouterTransition("1", 'a', "2");
-//       af.ajouterTransition("1", 'a', "1");
-//       af.ajouterTransition("1", 'b', "2");
-//       af.ajouterTransition("2", 'a', "1");
-//       af.ajouterTransition("2", 'b', "2");
-//       af.ajouterTransition("2", 'b', "3");
-//       af.ajouterTransition("3", 'a', "2");
-       
-       
-//        af.ajouterEtat("0", TypeEtat.INIT);
-//       af.ajouterEtat("1", TypeEtat.MID);
-//       af.ajouterEtat("2", TypeEtat.FINAL);
-//       af.setAlphabet(List.of('a', 'b'));
-//       af.ajouterTransition("0", 'a', "0");
-//       af.ajouterTransition("0", 'b', "0");
-//       af.ajouterTransition("0", 'a', "1");
-//       af.ajouterTransition("1", 'b', "2");
-//       af.ajouterTransition("2", 'b', "2");
-//       af.ajouterTransition("2", 'a', "2");
-       
-       //af.ajouterTransition("3", AutomateFini.EPSILON, "3");
-        //List <String> tous = af.generateAcceptedWords(af,4);
-        //System.out.println("tous les mots acceptés :"+ tous);
-
-
-
-//        System.out.println(af.reconnaissanceMot("00010"));
-         
-//        af.printAutomate("automatePNG/test2.png");
-//        af.printAutomate("automatePNG/test.png");
-//         af.printAutomate("automatePNG/test3.png");
-        
-
-//        launch(args);
-    }
 }

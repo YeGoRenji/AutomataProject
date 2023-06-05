@@ -1,5 +1,6 @@
-package com.automataproj.automataproject;
+package com.automataproj.automataproject.Popups;
 
+import com.automataproj.automataproject.Home;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;

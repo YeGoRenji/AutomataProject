@@ -1,22 +1,17 @@
-package com.automataproj.automataproject;
+package com.automataproj.automataproject.Popups;
 
 import com.automataproj.automataproject.Metier.AutomateFini;
 import com.automataproj.automataproject.Metier.Etat;
-import com.automataproj.automataproject.Metier.TypeEtat;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class PopupTransitionController implements Initializable {

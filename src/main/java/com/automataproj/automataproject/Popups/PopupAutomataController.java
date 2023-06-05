@@ -1,4 +1,4 @@
-package com.automataproj.automataproject;
+package com.automataproj.automataproject.Popups;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,7 +58,6 @@ public class PopupAutomataController implements Initializable {
         returnObj.automataName = automateNameText;
         returnObj.isAFND = afndButton.isSelected();
         returnObj.isOk = true;
-        System.out.println(returnObj);
         Stage stage = (Stage)cancelBtn.getScene().getWindow();
         stage.close();
     }

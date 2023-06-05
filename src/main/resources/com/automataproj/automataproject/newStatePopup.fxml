@@ -10,8 +10,8 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<?import com.automataproj.automataproject.Components.*?>
-<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.PopupStateController">
+<?import com.automataproj.automataproject.Comps.*?>
+<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.Popups.PopupStateController">
    <Panel prefWidth="750.0" prefHeight="400.0" styleClass="panel-primary">
       <heading>
          <Label styleClass="h3" text="Nouvelle état :" >
