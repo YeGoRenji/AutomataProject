@@ -1,6 +1,5 @@
 package com.automataproj.automataproject;
 
-import com.automataproj.automataproject.Metier.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -8,7 +7,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
-import java.util.List;
 
 public class Home extends Application {
     @Override

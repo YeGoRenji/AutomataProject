@@ -75,13 +75,13 @@ public class HelloApplication {
         Button unionBtn = (Button) scene.lookup("#unionId");
         unionBtn.setOnAction(event -> {
         	Stage stageProduct = new Stage();    	
-    		new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "union");
+//    		new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "union");
         });
         
         Button intersectBtn = (Button) scene.lookup("#intersectId");
         intersectBtn.setOnAction(event -> {
         	Stage stageProduct = new Stage();    	
-    		new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
+//    		new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
         });
         
         
