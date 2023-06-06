@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.ShowResultAutomaton;
-
+import presentation.showAutomataProduct;
 
 import java.io.IOException;
 import java.net.URL;
@@ -65,16 +65,26 @@ public class AutomataCreation implements Initializable {
     }
     @FXML
     public void onUnionAutomata(ActionEvent actionEvent) {
+    	 if (af.getEtats().size() == 0)
+         {
+             new Alert(Alert.AlertType.ERROR, "Automate vide !").show();
+             return;
+         }
         Stage stageProduct = new Stage();
-
-//        new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "union");
+        AFD afdConverted = (af instanceof AFD) ? (AFD) af : ((AFND) af).determiniser_2();
+        new showAutomataProduct(afdConverted, listAutomates, stageProduct, "union");
     }
     
     @FXML
     public void onIntersectAutomata(ActionEvent actionEvent) {
+    	 if (af.getEtats().size() == 0)
+         {
+             new Alert(Alert.AlertType.ERROR, "Automate vide !").show();
+             return;
+         }
     	 Stage stageProduct = new Stage();
-
-//       new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
+    	 AFD afdConverted = (af instanceof AFD) ? (AFD) af : ((AFND) af).determiniser_2();
+       new showAutomataProduct(afdConverted, listAutomates, stageProduct, "intersect");
     }
 
     @FXML

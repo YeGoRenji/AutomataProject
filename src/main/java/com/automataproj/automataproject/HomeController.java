@@ -34,20 +34,7 @@ public class    HomeController implements Initializable {
 
     private ImageView imgview;
 
-    public void onNewAutomata(Event event)
-    {
-        try {
-            PopupAutomataReturn returnObj =  PopupAutomataCreation.display();
-            if (!returnObj.isOk)
-                return;
-            FXMLLoader loader = new FXMLLoader(Home.class.getResource("automataCreation.fxml"));
-            automateList.getScene().setRoot(loader.load());
-            loader.<AutomataCreation>getController().setAfOnCreation(returnObj);
-            loader.<AutomataCreation>getController().setListAutomates(listAutomates);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,6 +63,21 @@ public class    HomeController implements Initializable {
 
     private void repaint(AutomateFini af) {
         imgview.setImage(SwingFXUtils.toFXImage(af.getAutomateImage().toImage(), null));
+    }
+    
+    public void onNewAutomata(Event event)
+    {
+        try {
+            PopupAutomataReturn returnObj =  PopupAutomataCreation.display();
+            if (!returnObj.isOk)
+                return;
+            FXMLLoader loader = new FXMLLoader(Home.class.getResource("automataCreation.fxml"));
+            automateList.getScene().setRoot(loader.load());
+            loader.<AutomataCreation>getController().setAfOnCreation(returnObj);
+            loader.<AutomataCreation>getController().setListAutomates(listAutomates);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void onModifyAutomata(ActionEvent event) {
