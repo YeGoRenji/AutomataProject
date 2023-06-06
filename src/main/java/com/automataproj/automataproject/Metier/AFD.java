@@ -83,6 +83,7 @@ public class AFD extends AutomateFini {
 
     public AFD minimiser()
     {
+	this.dernierId=0;
     	AFD af = new AFD();
     	af.setAlphabet(this.alphabet);
     	//Elimination des Etat Inaccessibles:
