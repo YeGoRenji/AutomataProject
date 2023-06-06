@@ -69,7 +69,7 @@ public class AFND extends AutomateFini {
                             nouvelleCollection.addAll(nextList);
                     }
                     if (nouvelleCollection.size() == 0)
-                        break;
+                        continue;
                     String idNew = getCollectionName(nouvelleCollection);
                     if (!collectionsList.contains(nouvelleCollection)) {
                         nomVersCollection.put(idNew, nouvelleCollection);
