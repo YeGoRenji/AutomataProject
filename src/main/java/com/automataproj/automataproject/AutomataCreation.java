@@ -3,7 +3,6 @@ package com.automataproj.automataproject;
 import com.automataproj.automataproject.Metier.AFD;
 import com.automataproj.automataproject.Metier.AFND;
 import com.automataproj.automataproject.Metier.AutomateFini;
-import com.automataproj.automataproject.Metier.TypeEtat;
 import com.automataproj.automataproject.Popups.*;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -11,8 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -33,9 +31,16 @@ public class AutomataCreation implements Initializable {
     private ImageView imgview;
     @FXML
     public Button minimiseId;
-
     @FXML
     public Button determinerId;
+    @FXML
+    public Button wordsId;
+    @FXML
+    public TextField readField;
+    @FXML
+    public Label labelRead;
+    @FXML
+    public Button btnRead;
     private List<AutomateFini> listAutomates;
 
     @FXML
@@ -126,9 +131,13 @@ public class AutomataCreation implements Initializable {
 
     public void setAf(AutomateFini af) {
         this.af = af;
-//        ((Stage)imgview.getScene().getWindow()).setTitle("Creating Automate : " + af.getIdAutomate() + " " + (af instanceof AFD ? "(AFND)" : "(AFD)"));
         if (af instanceof AFD)
             determinerId.setDisable(true);
+        else
+        {
+            wordsId.setDisable(true);
+            labelRead.setDisable(true);
+        }
         repaint();
     }
 
@@ -138,6 +147,12 @@ public class AutomataCreation implements Initializable {
         af.setIdAutomate(returnObj.automataName);
         if (!returnObj.isAFND)
             determinerId.setDisable(true);
+        else
+        {
+            wordsId.setDisable(true);
+            labelRead.setDisable(true);
+        }
+
         Platform.runLater(() -> ((Stage) mainPane.getScene().getWindow()).setTitle("Creating Automate : " + returnObj.automataName + " " + (returnObj.isAFND ? "(AFND)" : "(AFD)")));
         // C'est un Exemple Manuelle
 //        if (returnObj.isAFND)
@@ -177,5 +192,31 @@ public class AutomataCreation implements Initializable {
     public void onMinimiserClick(ActionEvent actionEvent) {
         AFD minAFD = ((AFD) af).minimiser();
         new ShowResultAutomaton(minAFD, new Stage(), "Minimisation");
+    }
+
+    public void onClickWords(ActionEvent actionEvent) {
+        TextInputDialog td = new TextInputDialog("La taille des mots ?");
+        td.showAndWait();
+        String input = td.getEditor().getText();
+        System.out.println(input);
+        try {
+            int taille = Integer.parseInt(input);
+            List<String> words = ((AFD) af).generateAcceptedWords(taille);
+            Alert a = new Alert(Alert.AlertType.INFORMATION, words.toString());
+            a.setHeaderText("Les Mots Acceptés : ");
+            a.setTitle("Mots Acceptés");
+            a.show();
+        }
+        catch (NumberFormatException e)
+        {
+            new Alert(Alert.AlertType.ERROR, "Taille doivent être un entier !").show();
+        }
+    }
+
+    public void readingWordId(ActionEvent actionEvent) {
+        String word = readField.getText().strip();
+
+        boolean isReconnue = ((AFD)af).reconnaissanceMot(word);
+        labelRead.setText(isReconnue ? "True" : "False");
     }
 }

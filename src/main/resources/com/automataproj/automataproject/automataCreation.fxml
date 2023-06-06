@@ -4,59 +4,61 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.AutomataCreation">
-    <SplitPane dividerPositions="0.1724598930481283" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <AnchorPane maxWidth="100.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0"
-                    style="-fx-background-color: #EEEEEE;">
-            <ToolBar orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.AutomataCreation">
+    <SplitPane dividerPositions="0.1724598930481283" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane maxWidth="100.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;">
+            <ToolBar orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <HBox alignment="CENTER">
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
-                    <Button onAction="#onClickState" mnemonicParsing="false" prefWidth="120.0"
-                            text="État"/>
+                    <Button mnemonicParsing="false" onAction="#onClickState" prefWidth="120.0" text="État" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onClickTransition" mnemonicParsing="false" prefWidth="120.0"
-                            text="Transition"/>
+                    <Button mnemonicParsing="false" onAction="#onClickTransition" prefWidth="120.0" text="Transition" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onDeterminerClick" fx:id="determinerId" prefWidth="120.0"
-                            text="Déterminer"/>
-                </HBox>
-                
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onMinimiserClick" fx:id="minimiseId" prefWidth="120.0"
-                            text="Minimiser"/>
+                    <Button fx:id="wordsId" mnemonicParsing="false" onAction="#onClickWords" prefWidth="120.0" text="Mots Acceptés" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onUnionAutomata" fx:id="unionId" prefWidth="120.0"
-                            text="Réunion"/>
+                    <Button fx:id="determinerId" onAction="#onDeterminerClick" prefWidth="120.0" text="Déterminer" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onIntersectAutomata" fx:id="intersectId" prefWidth="120.0"
-                            text="Intersection"/>
+                    <Button fx:id="minimiseId" onAction="#onMinimiserClick" prefWidth="120.0" text="Minimiser" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onClickComplement" fx:id="complementId" prefWidth="120.0"
-                            text="Complémentaire"/>
+                    <Button fx:id="unionId" onAction="#onUnionAutomata" prefWidth="120.0" text="Réunion" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onClickMirror" prefWidth="120.0"
-                            text="Image Miroir"/>
+                    <Button fx:id="intersectId" onAction="#onIntersectAutomata" prefWidth="120.0" text="Intersection" />
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
-                    <Button onAction="#onClickSave" fx:id="saveId" prefWidth="120.0"
-                            text="Sauvegarder"/>
+                    <Button fx:id="complementId" onAction="#onClickComplement" prefWidth="120.0" text="Complémentaire" />
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button onAction="#onClickMirror" prefWidth="120.0" text="Image Miroir" />
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                    <Button fx:id="saveId" onAction="#onClickSave" prefWidth="120.0" text="Sauvegarder" />
                 </HBox>
             </ToolBar>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <Pane fx:id="mainPane" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        </AnchorPane>
+      <SplitPane dividerPositions="0.9016064257028112" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+          <AnchorPane minHeight="183.0" minWidth="0.0" prefHeight="183.0" prefWidth="414.0" SplitPane.resizableWithParent="false">
+               <children>
+                     <Pane fx:id="mainPane" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
+          <AnchorPane minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="442.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <TextField fx:id="readField" layoutX="7.0" layoutY="5.0" />
+                   <Button fx:id="btnRead" layoutX="166.0" layoutY="5.0" onAction="#readingWordId" prefHeight="26.0" prefWidth="120.0" text="Reconnaissance" />
+                  <Label fx:id="labelRead" layoutX="299.0" layoutY="4.0" prefHeight="26.0" prefWidth="60.0" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding></AnchorPane>
+        </items>
+      </SplitPane>
     </SplitPane>
 </AnchorPane>

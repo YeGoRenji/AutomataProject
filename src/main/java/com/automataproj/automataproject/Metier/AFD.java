@@ -365,9 +365,9 @@ public class AFD extends AutomateFini {
     }
     */
 
-    public List<String> generateAcceptedWords(AFD afd, int maxLength) {
+    public List<String> generateAcceptedWords(int maxLength) {
         List<String> acceptedWords = new ArrayList<>();
-        generateAcceptedWordsHelper(afd, afd.getEtatsInit().get(0), "", maxLength, acceptedWords);
+        generateAcceptedWordsHelper(this, this.getEtatsInit().get(0), "", maxLength, acceptedWords);
         return acceptedWords;
     }
 
