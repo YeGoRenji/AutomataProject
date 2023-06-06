@@ -3,6 +3,8 @@ package com.automataproj.automataproject.Metier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 public class AFD extends AutomateFini {
@@ -81,6 +83,7 @@ public class AFD extends AutomateFini {
 
     public AFD minimiser()
     {
+	this.dernierId=0;
     	AFD af = new AFD();
     	af.setAlphabet(this.alphabet);
     	//Elimination des Etat Inaccessibles:
@@ -386,4 +389,112 @@ public class AFD extends AutomateFini {
 
 
     }
+    
+    public String brzozowski() {
+        // Étape 1 : Inverser les transitions pour obtenir un AFND
+        AFND reversed = this.imageMirror();
+
+        // Étape 2 : Déterminiser l'AFND inversé
+        AFD determinized = reversed.determiniser_2();
+
+        // Étape 3 : Inverser les transitions de l'AFD déterminisé
+        AFND reversedDeterminized = determinized.imageMirror();
+
+        // Étape 4 : Déterminiser à nouveau l'AFND inversé déterminisé
+        AFD determinizedReversedDeterminized = reversedDeterminized.determiniser_2();
+
+        // Étape 5 : Construire l'expression régulière correspondante à partir de l'AFD inversé déterminisé
+        String regex = determinizedReversedDeterminized.toRegex();
+        regex = this.simplifyRegex(regex);
+
+        return regex;
+    }
+
+    
+    
+    public String toRegex() {
+        // Tableau pour stocker les expressions régulières entre les états
+        String[][] expressions = new String[etats.size()][etats.size()];
+
+        // Initialisation des expressions régulières entre les états
+        for (int i = 0; i < etats.size(); i++) {
+            for (int j = 0; j < etats.size(); j++) {
+                if (i == j) {
+                    expressions[i][j] = "ε"; // Expression régulière pour les boucles sur un état
+                } else {
+                    expressions[i][j] = ""; // Expression régulière vide par défaut
+                }
+            }
+        }
+
+        // Construction des expressions régulières entre les états en utilisant les transitions sortantes
+        for (Etat etat : etats) {
+            int i = etats.indexOf(etat);
+            for (Character symbol : etat.getTransitionSortants().keySet()) {
+                List<Etat> destinations = etat.getTransitionSortants().get(symbol);
+                for (Etat destination : destinations) {
+                    int j = etats.indexOf(destination);
+                    String transitionExpression = symbol.toString();
+                    if (!expressions[i][j].isEmpty()) {
+                        transitionExpression = expressions[i][j] + " + " + transitionExpression; // Concaténation avec l'expression existante
+                    }
+                    expressions[i][j] = transitionExpression;
+                }
+            }
+        }
+
+        // Construction de l'expression régulière finale en utilisant l'algorithme de Warshall
+        for (int k = 0; k < etats.size(); k++) {
+            for (int i = 0; i < etats.size(); i++) {
+                for (int j = 0; j < etats.size(); j++) {
+                    if (!expressions[i][k].isEmpty() && !expressions[k][j].isEmpty()) {
+                        String kExpression = "(" + expressions[i][k] + ")(" + expressions[k][k] + ")*(" + expressions[k][j] + ")";
+                        if (!expressions[i][j].isEmpty()) {
+                            expressions[i][j] = expressions[i][j] + " + " + kExpression; // Concaténation avec l'expression existante
+                        } else {
+                            expressions[i][j] = kExpression;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Récupération de l'expression régulière finale entre l'état initial et les états finaux
+        int initialIndex = etats.indexOf(etatsInit.get(0));
+        String regex = "";
+        for (Etat etatFinal : etatsFinal) {
+            int finalIndex = etats.indexOf(etatFinal);
+            if (!expressions[initialIndex][finalIndex].isEmpty()) {
+                if (!regex.isEmpty()) {
+                    regex += " + ";
+                }
+                regex += expressions[initialIndex][finalIndex];
+            }
+        }
+
+        return regex;
+    }
+    
+    
+    public String simplifyRegex(String regex) {
+        // Éliminer les boucles vides
+        regex = regex.replaceAll("\\(ε\\)\\*", "");
+
+        // Réduire les doublons
+        Pattern pattern = Pattern.compile("(\\b\\w+\\b)(?=.*\\b\\1\\b)");
+        Matcher matcher = pattern.matcher(regex);
+        while (matcher.find()) {
+            String duplicate = matcher.group();
+            regex = regex.replace(duplicate, matcher.group(1));
+        }
+
+        // Utiliser les opérations d'union et de concaténation
+        regex = regex.replaceAll("(\\(.*?\\))( \\+ \\1)+", "$1");
+
+        // Réorganiser les termes
+        regex = regex.replaceAll("(\\w+)( \\+ \\1)+", "($1)");
+
+        return regex;
+    }
+
 }

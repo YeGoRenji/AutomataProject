@@ -49,12 +49,6 @@ public class AFND extends AutomateFini {
         collectionsList.add(etatInit);
         nomVersCollection.put(getCollectionName(etatInit), etatInit);
 
-//        Queue<Pair<String, Set<Etat>>> collectionQueue = new LinkedList<>();
-//        collectionQueue.add(new Pair<>(getCollectionName(etatInit), etatInit));
-//
-//        collectionQueue.
-
-
         boolean isNewRow;
         while (true)
         {
@@ -75,7 +69,7 @@ public class AFND extends AutomateFini {
                             nouvelleCollection.addAll(nextList);
                     }
                     if (nouvelleCollection.size() == 0)
-                        break;
+                        continue;
                     String idNew = getCollectionName(nouvelleCollection);
                     if (!collectionsList.contains(nouvelleCollection)) {
                         nomVersCollection.put(idNew, nouvelleCollection);

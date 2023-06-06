@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class Home extends Application {
-//    static AFD af = new AFD();
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("homeView.fxml"));

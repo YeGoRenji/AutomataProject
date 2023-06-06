@@ -31,13 +31,11 @@ public class AutomataCreation implements Initializable {
     public AutomateFini af;
 
     private ImageView imgview;
+    @FXML
+    public Button minimiseId;
 
     @FXML
-    private Button complementId;
-
-    @FXML
-    private Button mirrorId;
-
+    public Button determinerId;
     private List<AutomateFini> listAutomates;
 
     @FXML
@@ -129,6 +127,8 @@ public class AutomataCreation implements Initializable {
     public void setAf(AutomateFini af) {
         this.af = af;
 //        ((Stage)imgview.getScene().getWindow()).setTitle("Creating Automate : " + af.getIdAutomate() + " " + (af instanceof AFD ? "(AFND)" : "(AFD)"));
+        if (af instanceof AFD)
+            determinerId.setDisable(true);
         repaint();
     }
 
@@ -136,6 +136,8 @@ public class AutomataCreation implements Initializable {
         af = returnObj.isAFND ? new AFND() : new AFD();
         af.setAlphabet(returnObj.alphabets);
         af.setIdAutomate(returnObj.automataName);
+        if (!returnObj.isAFND)
+            determinerId.setDisable(true);
         Platform.runLater(() -> ((Stage) mainPane.getScene().getWindow()).setTitle("Creating Automate : " + returnObj.automataName + " " + (returnObj.isAFND ? "(AFND)" : "(AFD)")));
         // C'est un Exemple Manuelle
 //        if (returnObj.isAFND)
@@ -170,5 +172,10 @@ public class AutomataCreation implements Initializable {
     public void onDeterminerClick(ActionEvent actionEvent) {
         AFD afd = ((AFND) af).determiniser_2();
         new ShowResultAutomaton(afd, new Stage(), afd.getIdAutomate());
+    }
+
+    public void onMinimiserClick(ActionEvent actionEvent) {
+        AFD minAFD = ((AFD) af).minimiser();
+        new ShowResultAutomaton(minAFD, new Stage(), "Minimisation");
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.HomeController">
+    <ListView fx:id="automateList" fixedCellSize="100.0" layoutX="101.0" layoutY="58.0" prefHeight="474.0" prefWidth="246.0" style="-fx-background-color: #eaeaea;" styleClass="font-medium" />
+   <HBox alignment="CENTER" layoutX="279.0" layoutY="588.0" prefHeight="80.0" prefWidth="722.0" spacing="30.0">
+       <Button mnemonicParsing="false" onAction="#onNewAutomata" prefHeight="34.0" prefWidth="126.0" text="Nouveau Automate" />
+       <Button mnemonicParsing="false" onAction="#onModifyAutomata" prefHeight="34.0" prefWidth="128.0" text="Modifier Automate" />
+      <Rectangle fill="#f59005" height="48.0" width="3.0" />
+      <Button mnemonicParsing="false" onAction="#onUnionAutomata" prefHeight="34.0" prefWidth="128.0" text="Union" />
+      <Button layoutX="420.0" layoutY="33.0" mnemonicParsing="false" onAction="#onIntersectAutomata" prefHeight="34.0" prefWidth="128.0" text="Intersect" />
+   </HBox>
+    <AnchorPane layoutX="370.0" layoutY="58.0" prefHeight="474.0" prefWidth="811.0">
+        <Pane fx:id="previewPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    </AnchorPane>
+    <stylesheets>
+        <URL value="@fontMedium.css" />
+    </stylesheets>
+</AnchorPane>

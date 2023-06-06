@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.GridPane.*?>
+<?import org.kordamp.bootstrapfx.scene.layout.Panel?>
+<?import java.net.URL?>
+<?import com.automataproj.automataproject.Comps.*?>
+
+<AnchorPane prefWidth="750.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automataproj.automataproject.Popups.PopupAutomataController">
+   <Panel prefWidth="750.0" prefHeight="400.0" styleClass="panel-primary">
+      <heading>
+         <Label styleClass="h3" text="Nouveau Automate :" >
+            <font>
+               <Font name="Roboto Light" size="20.0" />
+            </font>
+         </Label>
+      </heading>
+      <body>
+         <GridPane vgap="30">
+            <TextField styleClass="font-medium" promptText="Nom d'Automate..." prefHeight="30" GridPane.hgrow="NEVER" GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="automataName"/>
+            <TextField styleClass="font-medium" promptText="Alphabets..." prefHeight="30" GridPane.hgrow="NEVER" GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="alphabets"/>
+            <fx:define>
+               <ToggleGroup fx:id="group" />
+            </fx:define>
+
+            <RadioButton selected="true" fx:id="afdButton" text="AFD" toggleGroup="$group" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <RadioButton fx:id="afndButton" text="AFND" toggleGroup="$group" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <HBox spacing="5" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="4">
+               <Button onAction="#onClickCreer" styleClass="btn, btn-success" text="Créer"/>
+               <Button onAction="#onClickCancel" fx:id="cancelBtn" styleClass="btn, btn-default" text="Cancel"/>
+            </HBox>
+         </GridPane>
+      </body>
+      <padding>
+         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      </padding>
+   </Panel>
+   <stylesheets>
+      <URL value="@fontMedium.css"/>
+   </stylesheets>
+</AnchorPane>
