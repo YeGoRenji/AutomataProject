@@ -11,8 +11,6 @@
        <Button mnemonicParsing="false" onAction="#onNewAutomata" prefHeight="34.0" prefWidth="126.0" text="Nouveau Automate" />
        <Button mnemonicParsing="false" onAction="#onModifyAutomata" prefHeight="34.0" prefWidth="128.0" text="Modifier Automate" />
       <Rectangle fill="#f59005" height="48.0" width="3.0" />
-      <Button mnemonicParsing="false" onAction="#onUnionAutomata" prefHeight="34.0" prefWidth="128.0" text="Union" />
-      <Button layoutX="420.0" layoutY="33.0" mnemonicParsing="false" onAction="#onIntersectAutomata" prefHeight="34.0" prefWidth="128.0" text="Intersect" />
    </HBox>
     <AnchorPane layoutX="370.0" layoutY="58.0" prefHeight="474.0" prefWidth="811.0">
         <Pane fx:id="previewPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

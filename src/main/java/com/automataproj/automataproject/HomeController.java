@@ -92,16 +92,4 @@ public class    HomeController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-    public void onUnionAutomata(ActionEvent actionEvent) {
-        Stage stageProduct = new Stage();
-
-//        new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "union");
-    }
-
-    public void onIntersectAutomata(ActionEvent actionEvent) {
-    	 Stage stageProduct = new Stage();
-
-//       new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
-    }
 }

@@ -65,6 +65,19 @@ public class AutomataCreation implements Initializable {
         } else
             System.out.println("it is null !");
     }
+    @FXML
+    public void onUnionAutomata(ActionEvent actionEvent) {
+        Stage stageProduct = new Stage();
+
+//        new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "union");
+    }
+    
+    @FXML
+    public void onIntersectAutomata(ActionEvent actionEvent) {
+    	 Stage stageProduct = new Stage();
+
+//       new showAutomataProduct(afDeterminisation, (AFD) primeM, stageProduct, "intersect");
+    }
 
     @FXML
     public void onClickComplement(ActionEvent event) throws IOException {
