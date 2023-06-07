@@ -1,26 +1,8 @@
-<div style="display: flex; align-items:center;">
-    <div>
-        kasdsoada
-    <div/>
-    <div>
-        soakdoasdk
-    <div/>
-</div>
-
-
 # Description : 
 Projet de Manipulation des Automates finies.
 
 **06 Juin 2023** \
 Projet d'études à l'ENSA khouribga ( 2er Année Cycle d'ingénieur Genie informatique ).
-
-<Center>TITRE CENTRE</Center>
-
-<div style="">
-    Text
-
-</div>
-
 
 **Réalisé par :**
 - Youssef LYOUSSFI
